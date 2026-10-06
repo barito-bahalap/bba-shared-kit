@@ -1,0 +1,17 @@
+{
+  "name": "@barito-bahalap/styles",
+  "version": "0.1.0",
+  "private": false,
+  "main": "./index.css",
+  "types": "./index.d.ts",
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
+  },
+  "exports": {
+    ".": "./index.css",
+    "./brands/corporate": "./brands/corporate.css",
+    "./brands/tech": "./brands/tech.css",
+    "./brands/media": "./brands/media.css",
+    "./brands/dashboard": "./brands/dashboard.css"
+  }
+}
