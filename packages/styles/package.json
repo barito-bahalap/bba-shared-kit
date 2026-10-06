@@ -1,6 +1,6 @@
 {
   "name": "@barito-bahalap/styles",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "private": false,
   "main": "./index.css",
   "types": "./index.d.ts",
@@ -8,10 +8,25 @@
     "registry": "https://npm.pkg.github.com"
   },
   "exports": {
-    ".": "./index.css",
-    "./brands/corporate": "./brands/corporate.css",
-    "./brands/tech": "./brands/tech.css",
-    "./brands/media": "./brands/media.css",
-    "./brands/dashboard": "./brands/dashboard.css"
+    ".": {
+      "types": "./index.d.ts",
+      "default": "./index.css"
+    },
+    "./brands/corporate": {
+      "types": "./index.d.ts",
+      "default": "./brands/corporate.css"
+    },
+    "./brands/tech": {
+      "types": "./index.d.ts",
+      "default": "./brands/tech.css"
+    },
+    "./brands/media": {
+      "types": "./index.d.ts",
+      "default": "./brands/media.css"
+    },
+    "./brands/dashboard": {
+      "types": "./index.d.ts",
+      "default": "./brands/dashboard.css"
+    }
   }
 }
