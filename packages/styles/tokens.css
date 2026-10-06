@@ -1,0 +1,357 @@
+/*
+Single source of truth for all design decisions.
+ARCHITECTURE: Two-layer token system
+  Layer 1  --palette-*   Raw named colors. Never used in components directly.
+  Layer 2  --clr-*       Semantic aliases. Components ONLY reference Layer 2.
+
+These are BBA's holding-layer defaults. Each app additionally loads a
+brands/*.css override (see brands/corporate.css, brands/tech.css,
+brands/media.css, brands/dashboard.css) which redefines the Layer 2
+--clr-primary / --clr-accent pairing per brand weighting. Components
+in @barito-bahalap/ui must only reference Layer 2 tokens so swapping
+an app's brand file is enough to reskin every shared component.
+*/
+
+/* Layer 1: Raw Palette */
+:root {
+  /* Base */
+  --palette-white: #ffffff;
+  --palette-white-rgb: 255, 255, 255;
+  --palette-black: #1f2421;
+  --palette-black-rgb: 31, 36, 33;
+
+  /* Brand */
+  --palette-teal: #007979;
+  --palette-teal-rgb: 0, 121, 121;
+  --palette-teal-light: #24b1b1;
+  --palette-teal-light-rgb: 36, 177, 177;
+  --palette-teal-hover: #005c5c;
+  --palette-cream: #ffe2af;
+  --palette-cream-rgb: 255, 226, 175;
+  --palette-orange: #e37434;
+  --palette-orange-rgb: 227, 116, 52;
+  --palette-orange-hover: #c25e22;
+
+  /* Neutrals: cool-teal-tinted concrete scale, light-first */
+  --palette-gray-0: #faf9f7;
+  --palette-gray-0-rgb: 250, 249, 247;
+  --palette-gray-50: #f7f5f1;
+  --palette-gray-50-rgb: 247, 245, 241;
+  --palette-gray-100: #eceae5;
+  --palette-gray-100-rgb: 236, 234, 229;
+  --palette-gray-200: #d9d9d6;
+  --palette-gray-200-rgb: 217, 217, 214;
+  --palette-gray-300: #bfc0bd;
+  --palette-gray-300-rgb: 191, 192, 189;
+  --palette-gray-400: #9ca09d;
+  --palette-gray-400-rgb: 156, 160, 157;
+  --palette-gray-500: #7a7f7c;
+  --palette-gray-500-rgb: 122, 127, 124;
+  --palette-gray-600: #5c6363;
+  --palette-gray-600-rgb: 92, 99, 99;
+  --palette-gray-700: #454b49;
+  --palette-gray-700-rgb: 69, 75, 73;
+  --palette-gray-800: #2c302e;
+  --palette-gray-800-rgb: 44, 48, 46;
+  --palette-gray-900: #1f2421;
+  --palette-gray-900-rgb: 31, 36, 33;
+
+  /* Status: warning reuses brand orange deliberately (one consistent
+     "attention" color across brand + system), danger/safe are
+     outside the brand palette since BBA has no reds/greens */
+  --palette-danger: #dc2626;
+  --palette-danger-rgb: 220, 38, 38;
+  --palette-safe: #16a34a;
+  --palette-safe-rgb: 22, 163, 74;
+  --palette-warning: var(--palette-orange);
+  --palette-warning-rgb: var(--palette-orange-rgb);
+}
+
+/* Layer 2: Semantic Tokens (BBA base defaults; brand files override
+   --clr-primary / --clr-accent / --clr-surface weighting only) */
+:root {
+  /* Canvas */
+  --clr-canvas: var(--palette-gray-0);
+  --clr-paper: var(--palette-white);
+  --clr-surface: var(--palette-gray-50);
+  --clr-surface-alt: var(--palette-gray-100);
+  --clr-border: rgba(var(--palette-black-rgb), 0.1);
+  --clr-border-strong: rgba(var(--palette-black-rgb), 0.22);
+
+  /* Ink */
+  --clr-ink: var(--palette-gray-900);
+  --clr-ink-soft: var(--palette-gray-700);
+  --clr-ink-muted: var(--palette-gray-500);
+  --clr-ink-faint: var(--palette-gray-300);
+  --clr-ink-rgb: var(--palette-gray-900-rgb);
+
+  /* On dark surfaces (dark section blocks, footers) */
+  --clr-ink-on-dark: var(--palette-white);
+  --clr-ink-on-dark-soft: rgba(var(--palette-white-rgb), 0.75);
+  --clr-ink-on-dark-muted: rgba(var(--palette-white-rgb), 0.45);
+
+  /* Brand: BBA base weighting (teal primary, orange accent).
+     Overridden per app in brands/*.css */
+  --clr-primary: var(--palette-teal);
+  --clr-primary-rgb: var(--palette-teal-rgb);
+  --clr-primary-light: var(--palette-teal-light);
+  --clr-primary-hover: var(--palette-teal-hover);
+  --clr-primary-soft: rgba(var(--palette-teal-rgb), 0.12);
+  /* White text on teal passes AA; brand files that promote orange to
+     primary (BBM) must override this to dark ink — see brands/media.css */
+  --clr-primary-ink: var(--palette-white);
+
+  --clr-accent: var(--palette-orange);
+  --clr-accent-rgb: var(--palette-orange-rgb);
+  --clr-accent-hover: var(--palette-orange-hover);
+  --clr-accent-soft: rgba(var(--palette-orange-rgb), 0.14);
+  /* Dark ink, not white: white-on-orange fails WCAG AA contrast (~3.3:1) */
+  --clr-accent-ink: var(--palette-gray-900);
+
+  --clr-cream: var(--palette-cream);
+  --clr-cream-rgb: var(--palette-cream-rgb);
+
+  /* Card */
+  --clr-card-bg: var(--clr-paper);
+  --clr-card-border: var(--clr-border);
+  --clr-card-hover-border: var(--clr-primary);
+
+  /* Status */
+  --clr-danger: var(--palette-danger);
+  --clr-danger-rgb: var(--palette-danger-rgb);
+  --clr-danger-soft: rgba(var(--palette-danger-rgb), 0.1);
+  --clr-safe: var(--palette-safe);
+  --clr-safe-soft: rgba(var(--palette-safe-rgb), 0.1);
+  --clr-warning: var(--palette-warning);
+  --clr-warning-soft: rgba(var(--palette-warning-rgb), 0.14);
+
+  /* Overlay */
+  --clr-overlay-light: rgba(var(--palette-black-rgb), 0.04);
+  --clr-overlay: rgba(var(--palette-black-rgb), 0.55);
+  --clr-overlay-strong: rgba(var(--palette-black-rgb), 0.85);
+
+  /* Shadow: soft, blurred elevation. No hard-offset shadows. */
+  --shadow-xs: 0 1px 2px rgba(var(--palette-black-rgb), 0.04);
+  --shadow-sm: 0 2px 6px rgba(var(--palette-black-rgb), 0.06);
+  --shadow-md: 0 6px 16px rgba(var(--palette-black-rgb), 0.08);
+  --shadow-lg: 0 16px 32px rgba(var(--palette-black-rgb), 0.1);
+  --shadow-focus: 0 0 0 3px rgba(var(--palette-teal-rgb), 0.35);
+
+  /* Focus */
+  --clr-focus-ring: rgba(var(--palette-teal-rgb), 0.6);
+
+  /* Gradients: used sparingly */
+  --gradient-hero: linear-gradient(
+    180deg,
+    transparent 0%,
+    rgba(var(--palette-black-rgb), 0.25) 100%
+  );
+
+  /* Fonts.
+     NOTE: PT Serif reliably supports only 400/700 (+ italics). Do not
+     assign heading weights above 700, the browser will synthesize a
+     fake bold instead of rendering a real one. */
+  --font-heading: "PT Serif", serif;
+  --font-body: "Google Sans", sans-serif;
+  --font-control: "Google Sans", sans-serif;
+  --font-mono: "Google Sans Code", monospace;
+
+  /* Font Weights */
+  --fw-light: 300;
+  --fw-regular: 400;
+  --fw-medium: 500;
+  --fw-semibold: 600;
+  --fw-bold: 700;
+
+  /* Font Sizes (mobile-first base) */
+  --fs-3xs: 0.625rem;
+  --fs-2xs: 0.6875rem;
+  --fs-xs: 0.75rem;
+  --fs-sm: 0.8rem;
+  --fs-sm-alt: 0.875rem;
+  --fs-base: 0.9375rem;
+  --fs-md: 1.0625rem;
+  --fs-lg: 1.0625rem;
+  --fs-xl: 1.1875rem;
+  --fs-2xl: 1.375rem;
+  --fs-3xl: 1.625rem;
+  --fs-4xl: 2rem;
+  --fs-hero: clamp(1.75rem, 8vw, 3.5rem);
+  --fs-display: clamp(2rem, 10vw, 5.5rem);
+
+  /* Line Height: relaxed enough for calm, professional reading */
+  --lh-none: 1;
+  --lh-tight: 1.1;
+  --lh-snug: 1.25;
+  --lh-normal: 1.6;
+  --lh-relaxed: 1.75;
+  --lh-loose: 2;
+
+  /* Letter Spacing: restrained, serif doesn't need aggressive tracking */
+  --ls-tightest: -0.02em;
+  --ls-tight: -0.01em;
+  --ls-normal: 0;
+  --ls-wide: 0.02em;
+  --ls-wider: 0.06em;
+  --ls-widest: 0.12em;
+
+  /* Typography Role Mapping */
+  --txt-display-font: var(--font-heading);
+  --txt-display-size: var(--fs-display);
+  --txt-display-weight: var(--fw-bold);
+  --txt-display-leading: var(--lh-none);
+  --txt-display-tracking: var(--ls-tightest);
+
+  --txt-hero-font: var(--font-heading);
+  --txt-hero-size: var(--fs-hero);
+  --txt-hero-weight: var(--fw-bold);
+  --txt-hero-leading: var(--lh-tight);
+  --txt-hero-tracking: var(--ls-tight);
+
+  --txt-h1-font: var(--font-heading);
+  --txt-h1-size: var(--fs-4xl);
+  --txt-h1-weight: var(--fw-bold);
+  --txt-h1-leading: var(--lh-tight);
+  --txt-h1-tracking: var(--ls-tight);
+
+  --txt-h2-font: var(--font-heading);
+  --txt-h2-size: var(--fs-3xl);
+  --txt-h2-weight: var(--fw-bold);
+  --txt-h2-leading: var(--lh-snug);
+
+  --txt-h3-font: var(--font-heading);
+  --txt-h3-size: var(--fs-2xl);
+  --txt-h3-weight: var(--fw-bold);
+  --txt-h3-leading: var(--lh-snug);
+
+  --txt-h4-font: var(--font-body);
+  --txt-h4-size: var(--fs-xl);
+  --txt-h4-weight: var(--fw-semibold);
+  --txt-h4-leading: var(--lh-snug);
+
+  --txt-h5-font: var(--font-body);
+  --txt-h5-size: var(--fs-lg);
+  --txt-h5-weight: var(--fw-semibold);
+  --txt-h5-leading: var(--lh-normal);
+
+  --txt-h6-font: var(--font-body);
+  --txt-h6-size: var(--fs-md);
+  --txt-h6-weight: var(--fw-semibold);
+  --txt-h6-leading: var(--lh-normal);
+
+  --txt-body-font: var(--font-body);
+  --txt-body-size: var(--fs-base);
+  --txt-body-weight: var(--fw-regular);
+  --txt-body-leading: var(--lh-normal);
+
+  --txt-body-sm-font: var(--font-body);
+  --txt-body-sm-size: var(--fs-sm);
+  --txt-body-sm-weight: var(--fw-regular);
+  --txt-body-sm-leading: var(--lh-normal);
+
+  --txt-caption-font: var(--font-control);
+  --txt-caption-size: var(--fs-2xs);
+  --txt-caption-weight: var(--fw-semibold);
+  --txt-caption-leading: var(--lh-snug);
+  --txt-caption-tracking: var(--ls-widest);
+
+  /* "control" = buttons, inputs, labels. Google Sans + capitalize per
+     brief. Change to uppercase globally here if you meant ALL CAPS. */
+  --txt-control-font: var(--font-control);
+  --txt-control-size: var(--fs-sm);
+  --txt-control-weight: var(--fw-semibold);
+  --txt-control-leading: var(--lh-snug);
+  --txt-control-tracking: var(--ls-wide);
+  --txt-control-transform: capitalize;
+
+  --txt-eyebrow-font: var(--font-control);
+  --txt-eyebrow-size: var(--fs-xs);
+  --txt-eyebrow-weight: var(--fw-bold);
+  --txt-eyebrow-tracking: var(--ls-widest);
+
+  --txt-mono-font: var(--font-mono);
+  --txt-mono-size: var(--fs-sm);
+  --txt-mono-weight: var(--fw-regular);
+
+  /* Spacing: 4px base grid */
+  --space-px: 1px;
+  --space-0: 0;
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.25rem;
+  --space-6: 1.5rem;
+  --space-7: 1.75rem;
+  --space-8: 2rem;
+  --space-10: 2.5rem;
+  --space-12: 3rem;
+  --space-16: 4rem;
+  --space-20: 5rem;
+  --space-24: 6rem;
+  --space-32: 8rem;
+
+  /* Layout */
+  --topbar-h: 64px;
+  --content-max: 1180px;
+  --content-narrow: 720px;
+  --content-wide: 1400px;
+  --page-padding: 1rem;
+  --section-gap: var(--space-16);
+  --section-gap-lg: var(--space-24);
+
+  /* Border Radius: generous by default, this is minimalist not brutalist */
+  --radius-none: 0;
+  --radius-xs: 6px;
+  --radius-sm: 8px;
+  --radius-md: 10px;
+  --radius-lg: 14px;
+  --radius-xl: 20px;
+  --radius-circle: 9999px;
+  --border-w: 1px;
+  --border-w-thick: 2px;
+
+  /* Transitions: calm and deliberate, no bounce/spring */
+  --ease-default: cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-out: cubic-bezier(0, 0, 0.2, 1);
+  --ease-in: cubic-bezier(0.4, 0, 1, 1);
+  --duration-instant: 90ms;
+  --duration-fast: 140ms;
+  --duration-base: 220ms;
+  --duration-slow: 320ms;
+  --duration-slower: 480ms;
+
+  /* Z-Index */
+  --z-below: -10;
+  --z-before: -1;
+  --z-base: 0;
+  --z-after: 1;
+  --z-above: 10;
+  --z-dropdown: 100;
+  --z-sticky: 200;
+  --z-overlay: 300;
+  --z-modal: 400;
+  --z-toast: 500;
+}
+
+/* Responsive: mobile first, scale up */
+@media (min-width: 768px) {
+  :root {
+    --page-padding: 2rem;
+    --fs-lg: 1.1875rem;
+    --fs-xl: 1.375rem;
+    --fs-2xl: 1.625rem;
+    --fs-3xl: 2rem;
+    --fs-4xl: 2.5rem;
+  }
+}
+@media (min-width: 1024px) {
+  :root {
+    --page-padding: clamp(3rem, 7vw, 7rem);
+    --fs-lg: 1.25rem;
+    --fs-xl: 1.5rem;
+    --fs-2xl: 1.875rem;
+    --fs-3xl: 2.25rem;
+    --fs-4xl: 3rem;
+  }
+}

@@ -1,0 +1,17 @@
+@import url("https://fonts.googleapis.com/css2?family=PT+Serif:ital,wght@0,400;0,700;1,400;1,700&family=Google+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800&family=Google+Sans+Code:wght@400;500;600&display=swap");
+
+/* Style Modules (shared package, single source of truth for all 4 apps) */
+@import "./tokens.css";
+@import "./reset.css";
+@import "./typography.css";
+@import "./layout.css";
+@import "./cards.css";
+@import "./motion.css";
+@import "./divider.css";
+
+/* Import ONE brand override after this file, per app:
+   @import "@barito-bahalap/styles/brands/corporate";
+   @import "@barito-bahalap/styles/brands/tech";
+   @import "@barito-bahalap/styles/brands/media";
+   @import "@barito-bahalap/styles/brands/dashboard";
+*/

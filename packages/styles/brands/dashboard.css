@@ -1,0 +1,26 @@
+/* apps/dashboard: Control Plane
+   Neutral-forward, functional over expressive. Teal for actions only,
+   orange reserved for warnings same as BBT. High data density takes
+   priority over brand presence here. */
+
+:root {
+  --clr-primary: var(--palette-teal);
+  --clr-primary-light: var(--palette-gray-500);
+  --clr-primary-hover: var(--palette-teal-hover);
+  --clr-primary-ink: var(--palette-white);
+  --clr-accent: var(--palette-gray-600);
+  --clr-accent-hover: var(--palette-gray-700);
+  --clr-surface: var(--palette-gray-50);
+}
+
+body {
+  background: var(--clr-surface);
+}
+
+/* Data tables, logs, audit trail, JSON display */
+.mono,
+code,
+pre,
+table.data {
+  font-family: var(--font-mono);
+}

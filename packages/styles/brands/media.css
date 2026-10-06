@@ -1,0 +1,16 @@
+/* apps/media: BBM identity
+   Orange promoted to primary, teal as secondary support. Warmer,
+   more expressive surfaces (cream) than corporate or tech. */
+
+:root {
+  --clr-primary: var(--palette-orange);
+  --clr-primary-light: var(--palette-teal-light);
+  --clr-primary-hover: var(--palette-orange-hover);
+  --clr-accent: var(--palette-teal);
+  --clr-accent-hover: var(--palette-teal-hover);
+  --clr-surface: var(--palette-cream);
+  /* Orange is now primary. Unlike teal, white text on it fails WCAG
+     AA (~3.3:1) override to dark ink for any "primary button" or
+     similar component that assumes white-on-primary. */
+  --clr-primary-ink: var(--palette-gray-900);
+}

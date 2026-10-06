@@ -1,0 +1,87 @@
+/*
+Modern, minimalist card: subtle border + soft shadow, generous
+rounding, gentle hover lift. No hard-offset shadows, no thick
+"ink" borders.
+*/
+
+.card {
+  position: relative;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  padding: var(--space-4);
+  background-color: var(--clr-card-bg);
+  border: var(--border-w) solid var(--clr-card-border);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-sm);
+  transition:
+    transform var(--duration-base) var(--ease-default),
+    box-shadow var(--duration-base) var(--ease-default),
+    border-color var(--duration-base) var(--ease-default);
+  overflow: hidden;
+  z-index: var(--z-base);
+}
+.card:not(.card.not-hoverable) {
+  cursor: pointer;
+}
+
+/* Card sections */
+.card__header {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  justify-content: start;
+  gap: var(--space-2);
+}
+.card__body {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+.card__footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-1);
+  padding-top: var(--space-3);
+  border-top: var(--border-w) solid var(--clr-border);
+}
+
+/* Card variants */
+.card.dark {
+  background-color: var(--clr-ink);
+  border-color: var(--clr-ink);
+  color: var(--clr-ink-on-dark);
+  box-shadow: var(--shadow-md);
+}
+.card.dark p {
+  color: var(--clr-ink-on-dark-soft);
+}
+.card.flat {
+  box-shadow: none;
+}
+/* Bordered, no shadow: reads more "document/report" than "app card" —
+   use for compliance, spec, or credential-adjacent content */
+.card.bordered {
+  box-shadow: none;
+  border-color: var(--clr-border-strong);
+}
+.card.accent-border {
+  border-color: var(--clr-accent);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .card:not(.card.not-hoverable):hover {
+    box-shadow: var(--shadow-md);
+    transform: translateY(-2px);
+  }
+  .card.dark:not(.card.not-hoverable):hover {
+    box-shadow: var(--shadow-lg);
+  }
+  .card.bordered:not(.card.not-hoverable):hover {
+    box-shadow: none;
+    border-color: var(--clr-primary);
+    transform: none;
+  }
+}

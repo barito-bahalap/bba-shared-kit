@@ -1,0 +1,13 @@
+/* apps/corporate: BBA holding identity
+   Teal-dominant, institutional, balanced. Orange reserved for CTAs.
+   This mirrors tokens.css defaults; kept explicit for clarity and
+   so future adjustments to BBA vs BBT/BBM don't drift silently. */
+
+:root {
+  --clr-primary: var(--palette-teal);
+  --clr-primary-light: var(--palette-teal-light);
+  --clr-primary-hover: var(--palette-teal-hover);
+  --clr-accent: var(--palette-orange);
+  --clr-accent-hover: var(--palette-orange-hover);
+  --clr-surface: var(--palette-gray-50);
+}

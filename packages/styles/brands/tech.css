@@ -1,0 +1,13 @@
+/* apps/tech: BBT identity
+   Teal/neutral-dominant, precise, low-noise. Orange is NOT a default
+   accent here, it stays reserved for --clr-warning (see tokens.css)
+   so it reads as system status, not brand color, inside BBT surfaces. */
+
+:root {
+  --clr-primary: var(--palette-teal);
+  --clr-primary-light: var(--palette-teal-light);
+  --clr-primary-hover: var(--palette-teal-hover);
+  --clr-accent: var(--palette-gray-600);
+  --clr-accent-hover: var(--palette-gray-700);
+  --clr-surface: var(--palette-gray-50);
+}
