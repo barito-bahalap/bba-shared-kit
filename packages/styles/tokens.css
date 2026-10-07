@@ -8,7 +8,7 @@ These are BBA's holding-layer defaults. Each app additionally loads a
 brands/*.css override (see brands/corporate.css, brands/tech.css,
 brands/media.css, brands/dashboard.css) which redefines the Layer 2
 --clr-primary / --clr-accent pairing per brand weighting. Components
-in @bba/ui must only reference Layer 2 tokens so swapping
+in @barito-bahalap/ui must only reference Layer 2 tokens so swapping
 an app's brand file is enough to reskin every shared component.
 */
 

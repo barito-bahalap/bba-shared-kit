@@ -1,9 +1,11 @@
 {
-  "name": "@bba/ts-config",
+  "name": "@barito-bahalap/ts-config",
   "version": "0.1.0",
-  "private": true,
   "files": [
     "declarations.d.ts",
     "vite-env.d.ts"
-  ]
+  ],
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
+  }
 }

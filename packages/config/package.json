@@ -1,13 +1,13 @@
 {
-  "name": "@bba/config",
+  "name": "@barito-bahalap/config",
   "version": "0.1.0",
   "type": "module",
   "main": "index.ts",
   "types": "index.ts",
   "publishConfig": {
-    "access": "public"
+    "registry": "https://npm.pkg.github.com"
   },
   "dependencies": {
-    "@bba/types": "workspace:^"
+    "@barito-bahalap/types": "workspace:*"
   }
 }

@@ -1,7 +1,6 @@
 {
-  "name": "@bba/contexts",
+  "name": "@barito-bahalap/contexts",
   "version": "0.1.0",
-  "private": true,
   "type": "module",
   "main": "index.ts",
   "types": "index.ts",
@@ -11,7 +10,7 @@
     "./header": "./header/index.ts"
   },
   "dependencies": {
-    "@bba/types": "*"
+    "@barito-bahalap/types": "workspace:*"
   },
   "peerDependencies": {
     "@supabase/supabase-js": "^2.0.0",
@@ -21,5 +20,8 @@
     "@supabase/supabase-js": {
       "optional": true
     }
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
   }
 }

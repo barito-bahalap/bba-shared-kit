@@ -3,7 +3,7 @@ import type {
   HeaderCta,
   NavItem,
   SocialLink,
-} from "@bba/types";
+} from "@barito-bahalap/types";
 
 export const mainNav: NavItem[] = [
   { label: "About", href: "/#about" },

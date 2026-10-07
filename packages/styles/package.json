@@ -1,7 +1,6 @@
 {
-  "name": "@bba/styles",
-  "version": "0.1.2",
-  "private": false,
+  "name": "@barito-bahalap/styles",
+  "version": "0.1.4",
   "main": "./index.css",
   "types": "./index.d.ts",
   "publishConfig": {

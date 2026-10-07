@@ -1,7 +1,6 @@
 {
-  "name": "@bba/components",
+  "name": "@barito-bahalap/components",
   "version": "0.1.0",
-  "private": true,
   "type": "module",
   "main": "index.ts",
   "types": "index.ts",
@@ -12,5 +11,8 @@
   "peerDependencies": {
     "react": "^18.0.0 || ^19.0.0",
     "react-router-dom": "^6.0.0 || ^7.0.0"
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
   }
 }

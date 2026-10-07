@@ -1,4 +1,4 @@
-# @bba/styles
+# @barito-bahalap/styles
 
 ## Supersedes the earlier `packages-config` output
 
@@ -32,7 +32,7 @@ to reweight the same four brand colors differently:
 | `brands/media.css`     | apps/media (BBM)     | Orange  | Teal                                        |
 | `brands/dashboard.css` | apps/dashboard       | Teal    | Neutral gray                                |
 
-Components in `@bba/ui` should reference only `--clr-*` tokens, never
+Components in `@barito-bahalap/ui` should reference only `--clr-*` tokens, never
 `--palette-*` directly — that's what makes one component library look
 right across four differently-weighted brands.
 
@@ -40,8 +40,8 @@ right across four differently-weighted brands.
 
 ```css
 /* app/globals.css in each app */
-@import "@bba/styles";
-@import "@bba/styles/brands/corporate"; /* swap per app */
+@import "@barito-bahalap/styles";
+@import "@barito-bahalap/styles/brands/corporate"; /* swap per app */
 ```
 
 Order matters: the brand import must come after the base import, since
