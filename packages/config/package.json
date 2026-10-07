@@ -1,0 +1,13 @@
+{
+  "name": "@bba/config",
+  "version": "0.1.0",
+  "type": "module",
+  "main": "index.ts",
+  "types": "index.ts",
+  "publishConfig": {
+    "access": "public"
+  },
+  "dependencies": {
+    "@bba/types": "workspace:^"
+  }
+}

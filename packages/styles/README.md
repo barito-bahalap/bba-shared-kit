@@ -1,4 +1,4 @@
-# @barito-bahalap/styles
+# @bba/styles
 
 ## Supersedes the earlier `packages-config` output
 
@@ -40,8 +40,8 @@ right across four differently-weighted brands.
 
 ```css
 /* app/globals.css in each app */
-@import "@barito-bahalap/styles";
-@import "@barito-bahalap/styles/brands/corporate"; /* swap per app */
+@import "@bba/styles";
+@import "@bba/styles/brands/corporate"; /* swap per app */
 ```
 
 Order matters: the brand import must come after the base import, since

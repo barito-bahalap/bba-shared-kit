@@ -1,0 +1,9 @@
+{
+  "name": "@bba/ts-config",
+  "version": "0.1.0",
+  "private": true,
+  "files": [
+    "declarations.d.ts",
+    "vite-env.d.ts"
+  ]
+}
