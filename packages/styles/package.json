@@ -1,6 +1,6 @@
 {
   "name": "@barito-bahalap/styles",
-  "version": "0.1.4",
+  "version": "0.2.0",
   "main": "./index.css",
   "types": "./index.d.ts",
   "publishConfig": {

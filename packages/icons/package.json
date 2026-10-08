@@ -1,0 +1,13 @@
+{
+  "name": "@ampikalteng/icons",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./index.ts",
+    "./brand": "./brand/index.ts"
+  },
+  "peerDependencies": {
+    "react": "^18 || ^19"
+  }
+}

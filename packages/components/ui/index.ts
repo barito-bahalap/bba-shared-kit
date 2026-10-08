@@ -1,5 +1,3 @@
-export { RegionMapCounter } from "./RegionMapCounter"; // Weird one
-
 export * from "./button";
 export * from "./cards";
 export * from "./display";
