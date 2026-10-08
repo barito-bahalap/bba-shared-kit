@@ -1,0 +1,6 @@
+/* SkeletonBlock: inherits .skeleton shimmer from motion.css */
+.skel-block {
+  width: calc(var(--skl-w) - var(--minus-padding));
+  display: block;
+  border-radius: var(--radius-xs);
+}

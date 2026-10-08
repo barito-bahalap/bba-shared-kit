@@ -1,0 +1,6 @@
+.skel-paragraph {
+  display: flex;
+  flex-direction: column;
+  align-items: end;
+  gap: var(--space-4);
+}

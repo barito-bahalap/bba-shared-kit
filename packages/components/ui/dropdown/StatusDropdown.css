@@ -1,0 +1,51 @@
+.status-dd {
+  position: relative;
+  display: inline-block;
+  text-align: center;
+}
+
+/* Trigger */
+.status-dd-trigger {
+  min-width: 120px;
+  display: flex;
+  align-items: center;
+  gap: var(--space-1);
+  background: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+/* Dropdown menu */
+.status-dd-menu {
+  z-index: var(--z-above);
+  min-width: 120px;
+  position: absolute;
+  top: 110%;
+  left: 50%;
+  padding: var(--space-1);
+  border: 1px solid var(--clr-border-strong);
+  border-radius: var(--radius-xs);
+  background: var(--clr-canvas);
+  transform: translateX(-50%);
+}
+
+/* Item */
+.status-dd-item {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  padding: var(--space-1);
+  border-radius: var(--radius-sm);
+  background: transparent;
+  border: none;
+  cursor: pointer;
+}
+.status-dd-item:hover {
+  background: var(--clr-canvas);
+}
+
+.status-dd-trigger .badge,
+.status-dd-item .badge {
+  width: 100%;
+  justify-content: center;
+}

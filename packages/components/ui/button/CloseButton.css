@@ -1,0 +1,29 @@
+.close-btn {
+  width: 22px;
+  height: 22px;
+  aspect-ratio: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  align-self: center;
+
+  padding: var(--space-1);
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--clr-danger);
+  color: var(--clr-danger);
+  background-color: var(--clr-danger-soft);
+
+  transition: all var(--duration-base) var(--ease-default);
+  cursor: pointer;
+}
+.close-btn svg {
+  fill: var(--clr-danger);
+}
+
+.close-btn:hover {
+  color: var(--clr-white);
+  background-color: var(--clr-danger);
+}
+.close-btn:hover svg {
+  fill: var(--clr-white);
+}

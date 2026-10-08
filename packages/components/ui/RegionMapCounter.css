@@ -1,0 +1,12 @@
+.region-map-counter__dot {
+  width: 8px;
+  height: 8px;
+  border-radius: var(--radius-circle);
+  flex: none;
+}
+.region-map-counter__dot--registered {
+  background-color: var(--clr-safe);
+}
+.region-map-counter__dot--unregistered {
+  background-color: var(--clr-ink-faint);
+}

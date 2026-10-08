@@ -1,18 +1,16 @@
 {
-  "name": "@barito-bahalap/components",
-  "version": "0.1.0",
+  "name": "@bba/components",
+  "version": "0.2.0",
+  "private": true,
   "type": "module",
-  "main": "index.ts",
-  "types": "index.ts",
   "exports": {
     ".": "./index.ts",
-    "./routing": "./routing/index.ts"
+    "./feedback": "./feedback/index.ts",
+    "./routing": "./routing/index.ts",
+    "./seo": "./seo/index.ts",
+    "./ui": "./ui/index.ts"
   },
   "peerDependencies": {
-    "react": "^18.0.0 || ^19.0.0",
-    "react-router-dom": "^6.0.0 || ^7.0.0"
-  },
-  "publishConfig": {
-    "registry": "https://npm.pkg.github.com"
+    "react": "^18 || ^19"
   }
 }

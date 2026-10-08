@@ -1,0 +1,47 @@
+/* SkeletonStat mirrors StatCard layout */
+
+.skel-stat {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  padding: var(--space-5) var(--space-6);
+  background: var(--clr-paper);
+  border: 1px solid var(--clr-border);
+  overflow: hidden;
+}
+
+/* Accent bar placeholder */
+.skel-stat::before {
+  width: 3px;
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  background: var(--clr-border);
+}
+
+/* Rich mode no bar */
+.skel-stat-rich::before {
+  display: none;
+}
+
+.skel-stat-top {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.skel-stat-mid {
+  display: flex;
+  align-items: center;
+}
+
+/* Multi-stat row matches grid-4 / grid-5 */
+.skel-stat-row {
+  width: 100%;
+  display: grid;
+  gap: var(--space-4);
+  grid-template-columns: repeat(var(--count, 4), 1fr);
+}

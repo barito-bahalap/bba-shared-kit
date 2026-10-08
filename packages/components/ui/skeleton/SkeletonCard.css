@@ -1,0 +1,43 @@
+/* SkeletonCard mirrors PropertyCard layout */
+
+/* Photo area matches .card-photo */
+.skel-card-photo {
+  height: 100%;
+  min-height: 70px;
+  background: linear-gradient(
+    90deg,
+    var(--clr-surface) 25%,
+    var(--clr-border) 50%,
+    var(--clr-surface) 75%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.4s ease-in-out infinite;
+}
+
+/* Body matches .card-body */
+.skel-card-body {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  padding: var(--space-4) var(--space-5) var(--space-5);
+}
+
+/* Specs row mirrors .prop-card-specs */
+.skel-card-specs {
+  display: flex;
+  padding-top: var(--space-1);
+  gap: 0;
+  border-top: 1px solid var(--clr-border);
+}
+
+.skel-card-spec {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.skel-card-spec + .skel-card-spec {
+  border-left: 1px solid var(--clr-border);
+  padding-left: var(--space-4);
+}

@@ -1,0 +1,134 @@
+.input-group {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  text-align: start;
+}
+
+/* Label */
+.input-label {
+  display: block;
+  color: var(--clr-ink-muted);
+  font-family: var(--font-control);
+  font-size: var(--fs-xs);
+  font-weight: 600;
+  letter-spacing: var(--ls-wider);
+  text-transform: uppercase;
+}
+
+/* Base input */
+.input {
+  width: 100%;
+  min-height: fit-content;
+  font-family: var(--font-control);
+  font-size: var(--text-sm);
+  color: var(--clr-ink);
+  background-color: var(--clr-canvas);
+  border: 1px solid var(--clr-border-strong);
+  border-radius: var(--radius-xs);
+  padding: var(--space-2);
+  transition: all var(--duration-fast) var(--ease-default);
+  outline: none;
+}
+.input::placeholder {
+  font-size: var(--fs-xs);
+  font-weight: 400;
+  color: var(--clr-ink-faint);
+}
+.input:focus {
+  border-color: var(--clr-ink-muted);
+  border-radius: var(--radius-xs);
+}
+.input:disabled {
+  opacity: 0.5;
+  background-color: var(--clr-surface);
+  cursor: not-allowed !important;
+}
+
+/* Error state */
+.input-error {
+  border-color: var(--clr-danger);
+  background-color: var(--clr-danger-soft);
+}
+.input-error:focus {
+  border-color: var(--clr-danger);
+}
+.input-error-msg {
+  font-family: var(--font-heading);
+  font-size: var(--fs-2xs);
+  font-style: italic;
+  font-weight: 700;
+  letter-spacing: var(--ls-widest);
+  color: var(--clr-danger);
+}
+
+/* Textarea variant */
+.input-textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+/* Password wrapper */
+.input-wrap {
+  position: relative;
+}
+
+.input-has-eye {
+  padding-right: 2.75rem; /* make room for the eye button */
+}
+
+/* Eye toggle */
+.input-eye {
+  position: absolute;
+  right: 0;
+  top: 0;
+  height: 100%;
+  width: 2.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--clr-ink-muted);
+  transition: color var(--duration-fast);
+}
+
+.input-eye:hover {
+  color: var(--clr-ink);
+}
+
+/* Icon inside input */
+.input-wrap {
+  position: relative;
+}
+
+.input-icon {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  align-items: center;
+  pointer-events: none;
+  color: var(--clr-ink-muted);
+}
+
+.input-icon-left {
+  left: var(--space-4);
+}
+.input-icon-right {
+  right: var(--space-4);
+}
+
+/* Padding offsets so text doesn't collide with icon */
+.input-has-icon-left {
+  padding-left: 2.5rem;
+}
+.input-has-icon-right {
+  padding-right: 2.5rem;
+}
+
+.input-label__required {
+  color: var(--clr-danger);
+}

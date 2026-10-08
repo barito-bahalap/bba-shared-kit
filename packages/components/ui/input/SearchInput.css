@@ -1,0 +1,92 @@
+/*
+SEARCH INPUT
+Fully controlled: caller owns the value string via value + onChange.
+The browser's native search clear button is suppressed; we render our own
+which only appears when there is a value.
+
+Layout:
+  .search-input           relative flex row wrapper
+    .search-input__icon   non-interactive icon (left side)
+    .search-input__field  the actual <input type="search">
+    .search-input__clear  clear button (right side, conditional)
+*/
+
+.search-input {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 0;
+  background-color: var(--clr-ink-on-dark-muted);
+  border: 1.5px solid var(--clr-border-strong);
+  border-radius: var(--radius-md);
+  padding: var(--space-2) var(--space-3);
+  transition:
+    border-color var(--duration-fast) var(--ease-default),
+    box-shadow var(--duration-fast) var(--ease-default);
+  width: fit-content;
+}
+
+.search-input--full {
+  width: 100%;
+}
+
+.search-input:focus-within {
+  border-color: var(--clr-ink-on-dark-muted);
+  box-shadow: 0 0 0 3px var(--clr-primary-soft);
+}
+
+.search-input--disabled {
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+/* Left icon: purely decorative */
+.search-input__icon--left {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+  margin-right: var(--space-2);
+}
+
+/* Field */
+.search-input__field {
+  flex: 1;
+  border: none;
+  outline: none;
+  background: transparent;
+  color: var(--clr-ink-on-dark);
+  font-family: var(--font-control);
+  font-size: var(--fs-sm);
+  min-width: 0;
+  /* Suppress browser native clear button on type="search" */
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+.search-input__field::placeholder {
+  color: var(--clr-ink-on-dark);
+}
+
+/* Hide WebKit's native search cancel button */
+.search-input__field::-webkit-search-cancel-button {
+  display: none;
+}
+
+/* Clear button */
+.search-input__clear {
+  display: flex;
+  align-items: center;
+  background: none;
+  border: none;
+  padding: 0;
+  margin-left: var(--space-2);
+  cursor: pointer;
+  flex-shrink: 0;
+  border-radius: var(--radius-xs);
+  transition: opacity var(--duration-fast) var(--ease-default);
+  opacity: 0.6;
+}
+
+.search-input__clear:hover {
+  opacity: 1;
+}

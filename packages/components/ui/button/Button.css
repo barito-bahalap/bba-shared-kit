@@ -1,0 +1,195 @@
+.btn {
+  width: fit-content;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-0);
+
+  border-radius: var(--radius-sm);
+  border: 1px solid transparent;
+
+  padding-inline: var(--space-3);
+  padding-block: 7px 8px;
+
+  transition: all var(--duration-base) var(--ease-default);
+  text-transform: uppercase;
+  text-decoration: none;
+
+  font-family: var(--font-control);
+  font-size: var(--fs-xs);
+  font-weight: 700;
+  letter-spacing: var(--ls-widest);
+  line-height: 1;
+
+  white-space: nowrap;
+  cursor: pointer;
+}
+.btn:active {
+  transform: scale(0.97);
+}
+.btn:focus-visible {
+  outline: 2px solid var(--clr-accent);
+  outline-offset: 3px;
+}
+.btn.disabled,
+.btn:disabled {
+  opacity: 0.5;
+  pointer-events: none;
+  cursor: not-allowed;
+}
+
+.btn-loading {
+  opacity: 0.75;
+  pointer-events: none;
+}
+
+/* SIZES */
+.btn-sm {
+  font-size: var(--fs-2xs);
+  padding-inline: var(--space-2);
+  padding-block: 5px 4px;
+}
+
+.btn-lg {
+  font-size: var(--fs-sm);
+  padding-inline: var(--space-4);
+  padding-block: 12px 11px;
+}
+
+/* LAYOUT */
+.btn-full {
+  width: 100%;
+}
+
+.btn-icon-only {
+  padding: var(--space-2);
+  width: 36px;
+  height: 36px;
+}
+
+.btn-icon-only.btn-sm {
+  width: 22px;
+  height: 22px;
+  padding: var(--space-1);
+}
+.btn-icon-only.btn-lg {
+  width: 44px;
+  height: 44px;
+}
+
+/* VARIANTS
+   Pattern: set `color` on the button itself (not on .button-label),
+   and let icon/label inherit via currentColor. This is what was
+   breaking on hover: the !important label rules were overriding
+   the hover color and freezing the text. */
+
+/* Primary: accent yellow surface, navy ink (matches --clr-accent-ink) */
+.btn-primary {
+  background-color: var(--clr-accent);
+  color: var(--clr-accent-ink); /* = navy, correct on-yellow contrast */
+  border-color: var(--clr-accent);
+}
+
+/* Secondary: navy surface, must use on-dark ink, not --clr-ink */
+.btn-secondary {
+  background-color: var(--clr-primary);
+  color: var(--clr-ink-on-dark);
+  border-color: var(--clr-primary);
+}
+
+/* Outline */
+.btn-outline {
+  background-color: var(--clr-canvas);
+  color: var(--clr-ink);
+  border-color: var(--clr-ink);
+}
+
+/* Ghost */
+.btn-ghost {
+  padding: 0;
+  background-color: inherit;
+  color: var(--clr-primary);
+  border-color: transparent;
+}
+
+/* Ink */
+.btn-ink {
+  background-color: var(--clr-ink);
+  color: var(--clr-ink-on-dark);
+  border-color: var(--clr-ink);
+}
+
+.btn-danger {
+  background-color: var(--clr-danger-soft);
+  color: var(--clr-danger);
+  border-color: var(--clr-danger);
+}
+
+.btn-safe {
+  background-color: var(--clr-safe);
+  color: var(--clr-ink-on-dark);
+  border-color: var(--clr-safe-soft);
+}
+
+/* Custom */
+.btn-custom {
+  background-color: var(--btn-bg);
+  color: var(--btn-text, var(--clr-paper));
+  border-color: var(--btn-border, var(--btn-bg));
+}
+
+/* Icon + label always follow the button's own color: no per-variant overrides needed */
+.btn .icon-svg {
+  width: fit-content !important;
+  height: fit-content !important;
+  padding: 0 !important;
+  background-color: transparent !important;
+  fill: currentColor;
+}
+/* Label/text */
+.button-label {
+  text-align: center;
+  color: inherit;
+}
+.btn-primary .button-label {
+  color: var(--clr-primary) !important;
+}
+.btn-outline .button-label {
+  color: var(--clr-ink) !important;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .btn:not(.btn-icon-only, .btn-ghost):not(:disabled):hover {
+    box-shadow: var(--shadow-sm);
+    transform: translateY(-1px);
+  }
+  .btn:active {
+    transform: translateY(0) scale(0.97);
+  }
+  .btn-primary:hover {
+    background-color: var(--clr-accent-hover);
+    border-color: var(--clr-primary);
+  }
+  .btn-primary:hover * {
+    fill: var(--clr-surface);
+  }
+  .btn-secondary:hover {
+    background-color: var(--clr-primary-hover);
+    color: var(--clr-paper);
+    border-color: var(--clr-primary-hover);
+  }
+  .btn-outline:hover {
+    background-color: var(--clr-surface-alt);
+    border-color: var(--clr-primary);
+  }
+  .btn-ghost:hover {
+    color: var(--clr-accent-hover);
+  }
+  .btn-ink:hover {
+    background-color: var(--clr-ink-soft);
+    color: var(--clr-surface);
+  }
+  .btn-custom:hover {
+    opacity: 0.88;
+  }
+}

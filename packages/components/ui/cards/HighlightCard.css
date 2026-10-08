@@ -1,0 +1,28 @@
+.card--highlight {
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.card__header--ha {
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+  padding-block: 4rem;
+}
+
+.card__body.card__body--ha {
+  gap: var(--space-3);
+}
+
+.ha__title {
+  color: var(--clr-ink-on-dark);
+  font-weight: var(--fw-semibold);
+  text-transform: capitalize;
+}
+
+@media (min-width: 768px) {
+  .card__header--ha {
+    padding-block: 8rem;
+  }
+}

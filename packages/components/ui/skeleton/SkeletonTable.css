@@ -1,0 +1,26 @@
+/* SkeletonTable mirrors DataTable layout */
+
+.skel-table-wrap {
+  display: flex;
+  flex-direction: column;
+}
+
+.skel-table-head {
+  display: flex;
+  align-items: center;
+  gap: var(--space-6);
+  padding: var(--space-3) var(--space-5);
+  background-color: var(--clr-canvas);
+}
+
+.skel-table-row {
+  display: flex;
+  align-items: center;
+  gap: var(--space-6);
+  padding: var(--space-4) var(--space-5);
+  border-bottom: 1px solid var(--clr-border);
+}
+
+.skel-table-row:last-child {
+  border-bottom: none;
+}

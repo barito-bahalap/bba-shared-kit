@@ -1,0 +1,13 @@
+.pgal--loading .pgal__hero,
+.pgal--loading .pgal__slot {
+  animation: pulse 1.5s ease-in-out infinite;
+}
+.pgal--loading .pgal__slot:nth-child(2) {
+  animation-delay: 0.1s;
+}
+.pgal--loading .pgal__slot:nth-child(3) {
+  animation-delay: 0.2s;
+}
+.pgal--loading .pgal__slot:nth-child(4) {
+  animation-delay: 0.3s;
+}
