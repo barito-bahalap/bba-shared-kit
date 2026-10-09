@@ -1,6 +1,6 @@
 {
   "name": "@barito-bahalap/config",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "type": "module",
   "main": "./index.ts",
   "types": "./index.ts",
@@ -8,7 +8,7 @@
     ".": "./index.ts"
   },
   "dependencies": {
-    "@barito-bahalap/types": "workspace:^"
+    "@barito-bahalap/types": "*"
   },
   "publishConfig": {
     "registry": "https://npm.pkg.github.com"

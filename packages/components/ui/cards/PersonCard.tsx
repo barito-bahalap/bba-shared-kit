@@ -5,7 +5,7 @@ import { Avatar } from "@barito-bahalap/components";
 
 interface PersonCardProps {
   name: string;
-  role: string;
+  title: string;
   bio?: string;
   photoSrc?: string;
   photoAlt?: string;
@@ -23,7 +23,7 @@ function initialsOf(name: string): string {
 
 export function PersonCard({
   name,
-  role,
+  title,
   bio,
   photoSrc,
   photoAlt,
@@ -49,7 +49,7 @@ export function PersonCard({
           />
           <div>
             <h3 className="person-card__name">{name}</h3>
-            <p className="person-card__role">{role}</p>
+            <p className="person-card__title">{title}</p>
           </div>
         </div>
         {bio && <p className="person-card__bio">{bio}</p>}

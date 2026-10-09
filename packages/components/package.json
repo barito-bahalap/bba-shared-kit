@@ -1,6 +1,6 @@
 {
   "name": "@barito-bahalap/components",
-  "version": "1.0.2",
+  "version": "1.0.4",
   "type": "module",
   "exports": {
     ".": "./index.ts",
@@ -11,9 +11,9 @@
     "./utils": "./utils/index.ts"
   },
   "dependencies": {
-    "@barito-bahalap/config": "workspace:^",
-    "@barito-bahalap/icons": "workspace:^",
-    "@barito-bahalap/types": "workspace:^"
+    "@barito-bahalap/config": "*",
+    "@barito-bahalap/icons": "*",
+    "@barito-bahalap/types": "*"
   },
   "peerDependencies": {
     "react": "^18 || ^19",

@@ -4,6 +4,7 @@ export interface Profile {
   id: string;
   name: string;
   role: UserRole;
+  title: string;
   bio?: string;
   photoSrc?: string;
   photoAlt?: string;

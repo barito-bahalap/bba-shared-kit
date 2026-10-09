@@ -1,6 +1,6 @@
 {
   "name": "@barito-bahalap/contexts",
-  "version": "1.0.1",
+  "version": "1.0.3",
   "type": "module",
   "exports": {
     ".": "./index.ts",
@@ -8,7 +8,7 @@
     "./auth": "./auth/index.ts"
   },
   "dependencies": {
-    "@barito-bahalap/types": "workspace:^",
+    "@barito-bahalap/types": "*",
     "@supabase/supabase-js": "^2.117.3"
   },
   "peerDependencies": {

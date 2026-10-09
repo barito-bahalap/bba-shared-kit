@@ -2,8 +2,10 @@ import type { FormEvent, ReactNode } from "react";
 // Style
 import "./ContactForm.css";
 // Components
-import { Button } from "../button";
-import { Checkbox, Input, Select, Textarea, type SelectOption } from "../input";
+import { Button, Checkbox } from "@barito-bahalap/components";
+import { Input, Select, Textarea } from "@barito-bahalap/components";
+// Types
+import type { SelectOption } from "@barito-bahalap/components";
 
 export type ContactField =
   | "name"
@@ -107,7 +109,7 @@ export function ContactForm({
         onChange={(checked) => onChange("consent", checked)}
       />
 
-      <Button label={submitLabel} type="submit" iconName="mail" fullWidth />
+      <Button label={submitLabel} type="submit" iconName="envelope" fullWidth />
 
       {status === "prepared" && (
         <p className="contact-form__status" role="status">
