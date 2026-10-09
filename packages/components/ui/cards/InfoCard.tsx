@@ -1,57 +1,39 @@
 // Style
 import "./InfoCard.css";
 // Components
-import { Badge, Icon, type BadgeVariants } from "@ampikalteng/components";
+import { Icon, type IconName } from "@barito-bahalap/components";
+// Utils
+import { cx } from "@barito-bahalap/components";
 // Types
-import type { IconsType } from "@ampikalteng/types";
+import type { Brand } from "@barito-bahalap/types";
 
-type InfoCardProps = {
+interface InfoCardProps {
+  iconName?: IconName;
   title: string;
   description: string;
-  iconName?: IconsType;
-  iconSize?: number | string;
-  category?: string;
-  badgeLabel?: string;
-  badgeVariant?: BadgeVariants;
-  categoryAfter?: boolean;
-  headerReverse?: boolean;
-};
+  brand?: Brand;
+  className?: string;
+}
 
 export function InfoCard({
+  iconName,
   title,
   description,
-  iconName,
-  iconSize,
-  category,
-  badgeLabel,
-  badgeVariant,
-  categoryAfter = false,
-  headerReverse = false,
+  brand,
+  className,
 }: InfoCardProps) {
   return (
-    <article className="card program-card stack col gap-3">
-      <div
-        className={`card__header stack ${headerReverse ? "row-reverse" : "row"} middle gap-3`}
-      >
-        {!categoryAfter && category && (
-          <span className="text caption muted">{category}</span>
-        )}
-        {iconName && (
-          <Icon iconName={iconName} size={iconSize} fill="var(--clr-primary)" />
-        )}
-        {badgeLabel && <Badge label={badgeLabel} variant={badgeVariant} />}
-      </div>
-
-      <div className="card__body">
-        <h6>{title}</h6>
-        <small>{description}</small>
-      </div>
-
-      <div className="card__footer">
-        {categoryAfter && category && (
-          <span className="text caption muted">{category}</span>
-        )}
-      </div>
+    <article
+      className={cx("card", "not-hoverable", "info-card", className)}
+      data-brand={brand}
+    >
+      {iconName && (
+        <span className="info-card__icon">
+          <Icon name={iconName} size={22} />
+        </span>
+      )}
+      <h3 className="info-card__title">{title}</h3>
+      <p className="info-card__text">{description}</p>
     </article>
   );
 }

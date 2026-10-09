@@ -1,48 +1,146 @@
-import { Helmet } from "react-helmet-async";
+import { useEffect } from "react";
+// Config
+import { siteConfig } from "@barito-bahalap/config";
 
-const BASE_URL = "https://ibb-opsfin.com";
-const DEFAULT_IMAGE = `${BASE_URL}/favicon.webp`;
-const SITE_NAME = "IBB Dashboard";
+type SeoType = "website" | "article";
+
+interface SEOProps {
+  title?: string;
+  description?: string;
+  path?: string;
+  image?: string;
+  noIndex?: boolean;
+  type?: SeoType;
+  structuredData?: Record<string, unknown> | null;
+}
+
+function upsert(
+  tag: "meta" | "link",
+  match: { attr: string; value: string },
+  props: Record<string, string>,
+) {
+  const selector = `${tag}[${match.attr}="${match.value}"]`;
+  let element = document.head.querySelector<HTMLElement>(selector);
+  if (!element) {
+    element = document.createElement(tag);
+    element.setAttribute(match.attr, match.value);
+    document.head.appendChild(element);
+  }
+  Object.entries(props).forEach(([key, value]) =>
+    element.setAttribute(key, value),
+  );
+}
+
+function remove(tag: "meta" | "link", attr: string, value: string) {
+  document.head.querySelector(`${tag}[${attr}="${value}"]`)?.remove();
+}
 
 export function SEO({
-  title = "",
-  description = "View today's latest report with ease.",
+  title,
+  description = siteConfig.description,
   path = "/",
-  image = DEFAULT_IMAGE,
+  image,
   noIndex = false,
   type = "website",
   structuredData = null,
-}) {
-  const fullTitle = noIndex ? `${title} | ${SITE_NAME}` : SITE_NAME;
-  const url = `${BASE_URL}${path}`;
+}: SEOProps) {
+  const fullTitle = title ? `${title} | ${siteConfig.name}` : siteConfig.name;
+  const url = `${siteConfig.url}${path}`;
+  const ogImage = image ?? siteConfig.ogImage;
+  const jsonLd = structuredData ? JSON.stringify(structuredData) : null;
 
-  return (
-    <Helmet>
-      <title>{fullTitle}</title>
-      <meta name="description" content={description} />
-      <link rel="canonical" href={url} />
-      {noIndex && <meta name="robots" content="noindex, nofollow" />}
+  useEffect(() => {
+    document.title = fullTitle;
 
-      <meta property="og:site_name" content={SITE_NAME} />
-      <meta property="og:type" content={type} />
-      <meta property="og:title" content={fullTitle} />
-      <meta property="og:description" content={description} />
-      <meta property="og:image" content={image} />
-      <meta property="og:url" content={url} />
-      <meta property="og:locale" content="en_US" />
+    upsert(
+      "meta",
+      { attr: "name", value: "description" },
+      { content: description },
+    );
+    upsert("link", { attr: "rel", value: "canonical" }, { href: url });
 
-      <meta name="twitter:card" content="summary_large_image" />
-      <meta name="twitter:site" content="@btengang" />
-      <meta name="twitter:creator" content="@btengang" />
-      <meta name="twitter:title" content={fullTitle} />
-      <meta name="twitter:description" content={description} />
-      <meta name="twitter:image" content={image} />
+    upsert(
+      "meta",
+      { attr: "property", value: "og:site_name" },
+      { content: siteConfig.name },
+    );
+    upsert("meta", { attr: "property", value: "og:type" }, { content: type });
+    upsert(
+      "meta",
+      { attr: "property", value: "og:title" },
+      { content: fullTitle },
+    );
+    upsert(
+      "meta",
+      { attr: "property", value: "og:description" },
+      { content: description },
+    );
+    upsert("meta", { attr: "property", value: "og:url" }, { content: url });
+    upsert(
+      "meta",
+      { attr: "property", value: "og:locale" },
+      { content: siteConfig.locale },
+    );
 
-      {structuredData && (
-        <script type="application/ld+json">
-          {JSON.stringify(structuredData)}
-        </script>
-      )}
-    </Helmet>
-  );
+    upsert(
+      "meta",
+      { attr: "name", value: "twitter:title" },
+      { content: fullTitle },
+    );
+    upsert(
+      "meta",
+      { attr: "name", value: "twitter:description" },
+      { content: description },
+    );
+
+    if (ogImage) {
+      upsert(
+        "meta",
+        { attr: "property", value: "og:image" },
+        { content: ogImage },
+      );
+      upsert(
+        "meta",
+        { attr: "name", value: "twitter:image" },
+        { content: ogImage },
+      );
+      upsert(
+        "meta",
+        { attr: "name", value: "twitter:card" },
+        { content: "summary_large_image" },
+      );
+    } else {
+      remove("meta", "property", "og:image");
+      remove("meta", "name", "twitter:image");
+      upsert(
+        "meta",
+        { attr: "name", value: "twitter:card" },
+        { content: "summary" },
+      );
+    }
+
+    if (noIndex) {
+      upsert(
+        "meta",
+        { attr: "name", value: "robots" },
+        { content: "noindex, nofollow" },
+      );
+    } else {
+      remove("meta", "name", "robots");
+    }
+  }, [fullTitle, description, url, ogImage, noIndex, type]);
+
+  useEffect(() => {
+    const id = "seo-jsonld";
+    document.getElementById(id)?.remove();
+    if (!jsonLd) return;
+    const script = document.createElement("script");
+    script.id = id;
+    script.type = "application/ld+json";
+    script.textContent = jsonLd;
+    document.head.appendChild(script);
+    return () => script.remove();
+  }, [jsonLd]);
+
+  return null;
 }

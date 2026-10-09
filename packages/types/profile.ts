@@ -1,11 +1,9 @@
-import type { UserRole } from "./enums";
-
-export interface Profile {
+export interface Person {
   id: string;
-  email: string | null;
-  full_name: string | null;
-  avatar_url: string | null;
-  role: UserRole;
-  created_at: string;
-  updated_at: string | null;
+  name: string;
+  role: string;
+  bio?: string;
+  photoSrc?: string;
+  photoAlt?: string;
+  published: boolean;
 }

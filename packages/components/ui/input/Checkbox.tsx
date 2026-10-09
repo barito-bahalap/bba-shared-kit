@@ -1,53 +1,44 @@
-import { useState } from "react";
-import type { ChangeEvent, FocusEvent } from "react";
+import type { ReactNode } from "react";
 // Style
 import "./Checkbox.css";
 
 interface CheckboxProps {
-  id?: string;
-  label: string;
-  onChange?: (checked: boolean) => void;
-  onBlur?: (e: FocusEvent<HTMLInputElement>) => void;
-  reverse?: boolean;
-  checked?: boolean;
+  id: string;
+  label: ReactNode;
+  checked: boolean;
+  onChange: (checked: boolean) => void;
+  error?: string;
   disabled?: boolean;
-  "aria-describedby"?: string;
 }
 
 export function Checkbox({
   id,
   label,
+  checked,
   onChange,
-  onBlur,
-  reverse = false,
-  checked: controlledChecked,
-  disabled = false,
-  "aria-describedby": ariaDescribedBy,
+  error,
+  disabled,
 }: CheckboxProps) {
-  const [internalChecked, setInternalChecked] = useState<boolean>(false);
-
-  const isControlled = controlledChecked !== undefined;
-  const checked = isControlled ? controlledChecked : internalChecked;
-
-  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const value = e.target.checked;
-    if (!isControlled) setInternalChecked(value);
-    onChange?.(value);
-  };
-
   return (
-    <label className="checkbox text sm muted" htmlFor={id}>
-      {reverse && <span dangerouslySetInnerHTML={{ __html: label }} />}
-      <input
-        id={id}
-        type="checkbox"
-        checked={checked}
-        disabled={disabled}
-        onChange={handleChange}
-        onBlur={onBlur}
-        aria-describedby={ariaDescribedBy}
-      />
-      {!reverse && <span dangerouslySetInnerHTML={{ __html: label }} />}
-    </label>
+    <div className="checkbox">
+      <label className="checkbox__label" htmlFor={id}>
+        <input
+          id={id}
+          type="checkbox"
+          className="checkbox__input"
+          checked={checked}
+          disabled={disabled}
+          aria-invalid={error ? true : undefined}
+          aria-describedby={error ? `${id}-error` : undefined}
+          onChange={(event) => onChange(event.target.checked)}
+        />
+        <span>{label}</span>
+      </label>
+      {error && (
+        <p id={`${id}-error`} className="checkbox__error" role="alert">
+          {error}
+        </p>
+      )}
+    </div>
   );
 }

@@ -1,6 +1,6 @@
 {
   "name": "@barito-bahalap/components",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "type": "module",
   "exports": {
     ".": "./index.ts",
@@ -9,8 +9,14 @@
     "./seo": "./seo/index.ts",
     "./ui": "./ui/index.ts"
   },
+  "dependencies": {
+    "@barito-bahalap/config": "workspace:^",
+    "@barito-bahalap/types": "workspace:^"
+  },
   "peerDependencies": {
-    "react": "^18 || ^19"
+    "react": "^18 || ^19",
+    "react-dom": "^18 || ^19",
+    "react-router-dom": "^6 || ^7"
   },
   "publishConfig": {
     "registry": "https://npm.pkg.github.com"

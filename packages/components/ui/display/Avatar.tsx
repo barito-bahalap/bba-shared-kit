@@ -1,46 +1,37 @@
 // Style
 import "./Avatar.css";
-// Utils
-import { getInitials } from "@ampikalteng/utils";
+// Components
+import { cx } from "@barito-bahalap/components";
 
-type AvatarSize = "xs" | "sm" | "md" | "lg" | "xl";
+type AvatarSize = "sm" | "md" | "lg" | "xl";
 
 interface AvatarProps {
-  src?: string | null;
-  name?: string;
+  src?: string;
+  name: string;
   size?: AvatarSize;
-  online?: boolean;
   className?: string;
-  onClick?: () => void;
 }
 
-export function Avatar({
-  src,
-  name = "",
-  size = "md",
-  online,
-  className = "",
-  onClick,
-}: AvatarProps) {
+function initialsOf(name: string): string {
+  return name
+    .split(" ")
+    .filter(Boolean)
+    .slice(0, 2)
+    .map((part) => part[0])
+    .join("")
+    .toUpperCase();
+}
+
+export function Avatar({ src, name, size = "md", className }: AvatarProps) {
   return (
-    <div
-      className={`avatar avatar--${size} ${onClick ? "avatar--clickable interactive" : ""} ${className}`}
-      onClick={onClick}
-      role={onClick ? "button" : undefined}
-      tabIndex={onClick ? 0 : undefined}
-    >
+    <span className={cx("avatar", `avatar--${size}`, className)}>
       {src ? (
-        <img src={src} alt={name || "Avatar"} className="avatar__img" />
+        <img src={src} alt={name} className="avatar__img" loading="lazy" />
       ) : (
-        <span className="avatar__initials">
-          {name ? getInitials(name) : "?"}
+        <span className="avatar__initials" aria-label={name} role="img">
+          {initialsOf(name)}
         </span>
       )}
-      {online != null && (
-        <span
-          className={`avatar__dot ${online ? "avatar__dot--online" : "avatar__dot--offline"}`}
-        />
-      )}
-    </div>
+    </span>
   );
 }

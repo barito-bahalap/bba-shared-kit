@@ -1,0 +1,11 @@
+.section {
+  align-items: stretch;
+  justify-content: flex-start;
+  padding-block: var(--section-gap);
+}
+
+@media (min-width: 1024px) {
+  .section {
+    padding-block: var(--section-gap-lg);
+  }
+}

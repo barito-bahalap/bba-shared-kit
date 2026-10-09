@@ -1,19 +1,14 @@
-export interface NavItem {
+export interface NavLink {
   label: string;
   href: string;
+}
+
+export interface FooterGroup {
+  title: string;
+  links: NavLink[];
 }
 
 export interface SocialLink {
-  label: string;
-  href: string;
-}
-
-export interface FooterLinkGroup {
-  title: string;
-  links: NavItem[];
-}
-
-export interface HeaderCta {
   label: string;
   href: string;
 }

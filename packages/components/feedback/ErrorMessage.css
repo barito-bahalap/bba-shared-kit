@@ -1,47 +1,24 @@
-/* ERROR MESSAGE */
 .error-msg {
-  flex: 1;
-  width: 100%;
-  height: 100%;
-  min-height: inherit;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: var(--space-1);
-  padding: var(--space-2);
-  border-radius: inherit;
-  border: 1px solid var(--clr-danger);
   color: var(--clr-danger);
+  font-size: var(--fs-sm-alt);
+  font-weight: var(--fw-medium);
+}
+
+.error-msg--block {
+  padding: var(--space-8) var(--space-4);
   text-align: center;
+  border: var(--border-w) solid var(--clr-danger);
+  border-radius: var(--radius-lg);
+  background-color: var(--clr-danger-soft);
 }
 
-.error-full {
-  height: 100svh;
+.error-msg__title {
+  font-family: var(--txt-h4-font);
+  font-size: var(--txt-h4-size);
+  font-weight: var(--txt-h4-weight);
+  color: var(--clr-danger);
 }
 
-.error-msg.no-border {
-  border-color: transparent;
-}
-
-/* Block variant: centered in a section */
-.error-msg-block {
-  flex: 1;
-  width: 100%;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: var(--space-1);
-  text-align: center;
-}
-
-.error-msg-text {
-  font-weight: var(--fw-semibold);
-}
-
-.error-msg-hint {
-  font-size: var(--fs-2xs);
-  font-style: italic;
+.error-msg__hint {
+  color: var(--clr-ink-soft);
 }

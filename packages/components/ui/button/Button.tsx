@@ -1,174 +1,122 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import type { MouseEvent, ReactNode } from "react";
 // Style
 import "./Button.css";
 // Components
-import { Icon, Pill } from "@ampikalteng/components";
+import { SmartLink, Icon, type IconName } from "@barito-bahalap/components";
+// Utils
+import { cx } from "@barito-bahalap/components";
 // Types
-import type { IconsType } from "@ampikalteng/types";
+import type { Brand } from "@barito-bahalap/types";
 
-export type ButtonVariants =
+export type ButtonVariant =
   | "primary"
-  | "secondary"
+  | "accent"
   | "outline"
   | "ghost"
-  | "danger"
-  | "safe"
-  | "ink";
+  | "ink"
+  | "light"
+  | "outline-light";
 
-type ButtonProps = {
-  label?: string;
-  variant?: ButtonVariants;
-  size?: "sm" | "md" | "lg";
-  fullWidth?: boolean;
-  disabled?: boolean;
-  loading?: boolean;
-  to?: string;
+export type ButtonSize = "sm" | "md" | "lg";
+
+type CommonProps = {
+  variant?: ButtonVariant;
+  size?: ButtonSize;
   href?: string;
-  iconName?: IconsType;
-  onClick?: React.MouseEventHandler<
-    HTMLButtonElement | HTMLAnchorElement | HTMLSpanElement
-  >;
+  onClick?: (event: MouseEvent<HTMLElement>) => void;
   type?: "button" | "submit" | "reset";
-  state?: unknown;
-  tooltip?: string;
-  className?: string;
-  bgColor?: string;
-  textColor?: string;
-  count?: number;
-  iconSize?: number;
+  iconName?: IconName;
   iconAfter?: boolean;
-  iconFill?: string;
-  viewBox?: string;
-} & React.HTMLAttributes<HTMLElement>;
+  loading?: boolean;
+  disabled?: boolean;
+  fullWidth?: boolean;
+  brand?: Brand;
+  className?: string;
+  children?: ReactNode;
+};
 
-export function Button({
-  label = "Button",
-  variant = "primary",
-  size = "md",
-  fullWidth = false,
-  disabled = false,
-  loading = false,
-  to,
-  href,
-  iconName,
-  onClick,
-  type = "button",
-  state,
-  tooltip,
-  className = "",
-  bgColor = "var(--clr-ink)",
-  textColor = "var(--clr-paper)",
-  count = 0,
-  iconSize = 16,
-  iconAfter = false,
-  iconFill = "currentColor",
-  viewBox = "0 0 16 16",
-  ...rest
-}: ButtonProps) {
-  const isIconOnly = !!iconName && label === "Button";
+type LabeledProps = CommonProps & { iconOnly?: false; ariaLabel?: string };
+type IconOnlyProps = CommonProps & { iconOnly: true; ariaLabel: string };
 
-  // allow CSS variables
-  const customStyle: React.CSSProperties | undefined =
-    bgColor || textColor
-      ? ({
-          "--btn-bg": bgColor,
-          "--btn-text": textColor,
-          "--btn-border": bgColor,
-          "--btn-bg-hover": bgColor,
-        } as React.CSSProperties)
-      : undefined;
+export type ButtonProps = LabeledProps | IconOnlyProps;
 
-  const hasCustomColors =
-    bgColor !== "var(--clr-ink)" || textColor !== "var(--clr-paper)";
+const ICON_SIZE: Record<ButtonSize, number> = { sm: 16, md: 18, lg: 20 };
 
-  const classes = [
-    "btn",
-    `btn-${variant}`,
-    hasCustomColors ? "btn-custom" : "",
-    size !== "md" ? `btn-${size}` : "",
-    fullWidth ? "btn-full" : "",
-    loading ? "btn-loading" : "",
-    disabled ? "disabled" : "",
-    isIconOnly ? "btn-icon-only" : "",
-    iconName ? "has-icon" : "",
+export function Button(props: ButtonProps) {
+  const {
+    variant = "primary",
+    size = "md",
+    href,
+    onClick,
+    type = "button",
+    iconName,
+    iconAfter = false,
+    loading = false,
+    disabled = false,
+    fullWidth = false,
+    brand,
     className,
-  ]
-    .filter(Boolean)
-    .join(" ");
+    children,
+    ariaLabel,
+  } = props;
+  const iconOnly = props.iconOnly === true;
+  const inactive = disabled || loading;
 
-  const iconEl = iconName && (
-    <Icon
-      iconName={iconName}
-      size={iconSize}
-      fill={iconFill}
-      viewBox={viewBox}
-    />
+  const classes = cx(
+    "btn",
+    `btn--${variant}`,
+    `btn--${size}`,
+    fullWidth && "btn--full",
+    iconOnly && "btn--icon-only",
+    loading && "btn--loading",
+    inactive && "is-inactive",
+    className,
   );
+
+  const icon = iconName ? (
+    <Icon name={iconName} size={ICON_SIZE[size]} />
+  ) : null;
 
   const content = (
-    <div className={`stack row middle center gap-2`}>
-      {!iconAfter && iconEl}
-      {!isIconOnly && <span className="button-label">{label}</span>}
-      {iconAfter && iconEl}
-      {!!count && <Pill count={count} />}
-    </div>
+    <>
+      {loading && <span className="btn__spinner" aria-hidden="true" />}
+      {!iconAfter && icon}
+      {!iconOnly && children && <span className="btn__label">{children}</span>}
+      {iconAfter && icon}
+    </>
   );
 
-  // LINK
-  if (to) {
-    return (
-      <Link
-        to={disabled || loading ? "#" : to}
-        state={disabled ? undefined : state}
-        className={classes}
-        onClick={(e) => {
-          if (disabled || loading) {
-            e.preventDefault();
-            return;
-          }
-          onClick?.(e);
-        }}
-        aria-disabled={disabled || loading}
-        title={tooltip}
-        style={customStyle}
-        {...rest}
-      >
-        {content}
-      </Link>
-    );
-  }
-
-  // EXTERNAL LINK
   if (href) {
     return (
-      <a
+      <SmartLink
         href={href}
         className={classes}
-        target="_blank"
-        rel="noopener noreferrer"
-        aria-disabled={disabled || loading}
-        title={tooltip}
-        style={customStyle}
-        onClick={onClick}
-        {...rest}
+        data-brand={brand}
+        aria-label={ariaLabel}
+        aria-disabled={inactive || undefined}
+        tabIndex={inactive ? -1 : undefined}
+        onClick={(event) => {
+          if (inactive) {
+            event.preventDefault();
+            return;
+          }
+          onClick?.(event);
+        }}
       >
         {content}
-      </a>
+      </SmartLink>
     );
   }
 
-  // BUTTON
   return (
     <button
       type={type}
       className={classes}
+      data-brand={brand}
+      aria-label={ariaLabel}
+      aria-busy={loading || undefined}
+      disabled={inactive}
       onClick={onClick}
-      disabled={disabled || loading}
-      title={tooltip}
-      style={customStyle}
-      aria-label={label}
-      {...rest}
     >
       {content}
     </button>

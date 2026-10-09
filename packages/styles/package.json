@@ -1,6 +1,6 @@
 {
   "name": "@barito-bahalap/styles",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "main": "./index.css",
   "types": "./index.d.ts",
   "publishConfig": {
@@ -26,6 +26,10 @@
     "./brands/dashboard": {
       "types": "./index.d.ts",
       "default": "./brands/dashboard.css"
+    },
+    "./brands/scopes": {
+      "types": "./index.d.ts",
+      "default": "./brands/scopes.css"
     }
   }
 }

@@ -1,20 +1,24 @@
-import type { DivisionId } from "./enums";
+import type { DivisionBrand, DivisionId } from "./enums";
 
 export interface SiteConfig {
   name: string;
   shortName: string;
+  legalName: string;
   tagline: string;
   description: string;
-  location: string;
+  url: string;
   contactEmail: string;
-  legalName: string;
+  location: string;
+  foundedYear: number;
+  locale: string;
+  ogImage?: string;
 }
 
-export interface DivisionConfig {
+export interface Division {
   id: DivisionId;
+  brand: DivisionBrand;
   name: string;
   shortName: string;
-  pitch: string;
-  externalUrl: string;
-  accentVar: string;
+  descriptor: string;
+  externalUrl?: string;
 }

@@ -5,9 +5,16 @@
 
 :root {
   --clr-primary: var(--palette-teal);
+  --clr-primary-rgb: var(--palette-teal-rgb);
   --clr-primary-light: var(--palette-teal-light);
   --clr-primary-hover: var(--palette-teal-hover);
+  --clr-primary-soft: rgba(var(--palette-teal-rgb), 0.12);
+  --clr-primary-ink: var(--palette-white);
   --clr-accent: var(--palette-gray-600);
+  --clr-accent-rgb: var(--palette-gray-600-rgb);
   --clr-accent-hover: var(--palette-gray-700);
+  --clr-accent-soft: rgba(var(--palette-gray-600-rgb), 0.12);
+  --clr-accent-ink: var(--palette-white);
   --clr-surface: var(--palette-gray-50);
+  --clr-card-hover-border: var(--palette-teal);
 }

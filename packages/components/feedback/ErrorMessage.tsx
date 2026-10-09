@@ -1,70 +1,36 @@
 // Style
 import "./ErrorMessage.css";
+// Utils
+import { cx } from "@barito-bahalap/components";
 
 interface ErrorMessageProps {
-  className?: string;
   message?: string;
-  hint?: string | null;
+  hint?: string;
   block?: boolean;
-  backgroundColor?: string;
-  noBorder?: boolean;
-  full?: boolean;
+  className?: string;
 }
 
-/**
-ErrorMessage: Displays an error string, inline or block-centered.
-
-Props:
-  message : error text to display
-  hint    : optional secondary line (block mode only)
-  block   : centered layout with padding, for section-level errors
-*/
 export function ErrorMessage({
-  className = "",
   message = "Something went wrong.",
-  hint = "",
+  hint,
   block = false,
-  backgroundColor = "var(--clr-danger-soft)",
-  noBorder = false,
-  full = false,
+  className,
 }: ErrorMessageProps) {
-  const classes = [
-    noBorder ? "no-border" : "",
-    full ? "error-full" : "",
-    className,
-  ]
-    .filter(Boolean)
-    .join(" ");
-
   if (block) {
     return (
       <div
-        className={`error-msg error-msg-block ${classes}`}
+        className={cx("status", "error-msg", "error-msg--block", className)}
         role="alert"
-        style={{ background: backgroundColor }}
       >
-        <h6 className="error-msg-text">{message}</h6>
-        {hint && <span className="error-msg-hint">{hint}</span>}
+        <h3 className="error-msg__title">{message}</h3>
+        {hint && <p className="error-msg__hint">{hint}</p>}
       </div>
     );
   }
 
   return (
-    <div className={`error-msg ${classes}`} role="alert">
-      <span className="error-msg-text">{message}</span>
-    </div>
+    <p className={cx("error-msg", className)} role="alert">
+      {message}
+    </p>
   );
 }
-
-/** Usage
-
-    // Inline (below a field)
-    <ErrorMessage message="Phone number is required" />
-
-    // Section-level
-    <ErrorMessage block message="Failed to load properties." hint="Check your connection and try again." />
-
-    // Typical query pattern
-    if (error) return <ErrorMessage block message="Failed to load properties." />;
-
-*/

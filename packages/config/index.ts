@@ -1,3 +1,3 @@
-export * from "./site";
-export * from "./navigation";
-export * from "./divisions";
+export { siteConfig } from "./site";
+export { divisions } from "./divisions";
+export { mainNav, headerCta, footerGroups, socialLinks } from "./navigation";

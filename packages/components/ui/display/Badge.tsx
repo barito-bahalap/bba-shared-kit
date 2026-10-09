@@ -1,50 +1,39 @@
-import React from "react";
+import type { ReactNode } from "react";
 // Style
 import "./Badge.css";
+// Components
+import { cx } from "@barito-bahalap/components";
+// Type
+import type { Brand } from "@barito-bahalap/types";
 
-export type BadgeVariants =
-  | "primary"
-  | "secondary"
-  | "outline"
-  | "ghost"
-  | "danger"
-  | "safe";
+export type BadgeVariant = "neutral" | "primary" | "accent" | "danger" | "safe";
 
-type BadgeProps = {
-  variant?: BadgeVariants;
-  label?: string;
+interface BadgeProps {
+  variant?: BadgeVariant;
+  dot?: boolean;
+  brand?: Brand;
   className?: string;
-} & React.HTMLAttributes<HTMLSpanElement>;
+  children: ReactNode;
+}
 
-/**
-Badge: Small status chip / label.
-
-Variants (token-driven):
-  - primary   → brand emphasis
-  - secondary → accent
-  - outline   → transparent bordered
-  - ghost     → subtle low-emphasis
-  - danger    → destructive / warning state
-  - safe      → success / positive state
-
-Props:
-  variant   : visual style
-  label     : text content
-  className : extra classes
-*/
 export function Badge({
-  variant = "primary",
-  label = "",
-  className = "",
-  ...rest
+  variant = "neutral",
+  dot = false,
+  brand,
+  className,
+  children,
 }: BadgeProps) {
-  const classes = ["badge", `badge-${variant}`, className]
-    .filter(Boolean)
-    .join(" ");
-
   return (
-    <span className={classes} {...rest}>
-      {label}
+    <span
+      className={cx(
+        "badge",
+        `badge--${variant}`,
+        dot && "badge--dot",
+        className,
+      )}
+      data-brand={brand}
+    >
+      {children}
     </span>
   );
 }

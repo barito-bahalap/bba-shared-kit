@@ -1,0 +1,22 @@
+.info-card {
+  gap: var(--space-3);
+  padding: var(--space-6);
+}
+
+.info-card__icon {
+  width: 44px;
+  height: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-md);
+  background-color: var(--clr-primary);
+  color: var(--clr-primary-ink);
+}
+
+.info-card__title {
+  font-family: var(--txt-h4-font);
+  font-size: var(--fs-lg);
+  font-weight: var(--txt-h4-weight);
+  line-height: var(--txt-h4-leading);
+}

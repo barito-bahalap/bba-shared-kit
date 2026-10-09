@@ -1,0 +1,56 @@
+/* Brand scopes: let one page show BBA, BBT and BBM surfaces side by side
+   without swapping the app's :root brand file. Every Layer 2 token that
+   is derived from primary or accent is redeclared here, because custom
+   properties that reference other variables are resolved where they are
+   declared (:root), not where they are used.
+   Usage: <div data-brand="tech"> ... </div>
+   Orange is never used as text on light surfaces (fails WCAG AA). Use
+   --clr-primary for fills and borders, --clr-primary-ink on top of it. */
+
+[data-brand="corporate"] {
+  --clr-primary: var(--palette-teal);
+  --clr-primary-rgb: var(--palette-teal-rgb);
+  --clr-primary-light: var(--palette-teal-light);
+  --clr-primary-hover: var(--palette-teal-hover);
+  --clr-primary-soft: rgba(var(--palette-teal-rgb), 0.12);
+  --clr-primary-ink: var(--palette-white);
+  --clr-accent: var(--palette-orange);
+  --clr-accent-rgb: var(--palette-orange-rgb);
+  --clr-accent-hover: var(--palette-orange-hover);
+  --clr-accent-soft: rgba(var(--palette-orange-rgb), 0.14);
+  --clr-accent-ink: var(--palette-gray-900);
+  --clr-surface: var(--palette-gray-50);
+  --clr-card-hover-border: var(--palette-teal);
+}
+
+[data-brand="tech"] {
+  --clr-primary: var(--palette-teal);
+  --clr-primary-rgb: var(--palette-teal-rgb);
+  --clr-primary-light: var(--palette-teal-light);
+  --clr-primary-hover: var(--palette-teal-hover);
+  --clr-primary-soft: rgba(var(--palette-teal-rgb), 0.12);
+  --clr-primary-ink: var(--palette-white);
+  --clr-accent: var(--palette-gray-600);
+  --clr-accent-rgb: var(--palette-gray-600-rgb);
+  --clr-accent-hover: var(--palette-gray-700);
+  --clr-accent-soft: rgba(var(--palette-gray-600-rgb), 0.12);
+  --clr-accent-ink: var(--palette-white);
+  --clr-surface: var(--palette-gray-50);
+  --clr-card-hover-border: var(--palette-teal);
+}
+
+[data-brand="media"] {
+  --clr-primary: var(--palette-orange);
+  --clr-primary-rgb: var(--palette-orange-rgb);
+  --clr-primary-light: var(--palette-teal-light);
+  --clr-primary-hover: var(--palette-orange-hover);
+  --clr-primary-soft: rgba(var(--palette-orange-rgb), 0.14);
+  --clr-primary-ink: var(--palette-gray-900);
+  --clr-accent: var(--palette-teal);
+  --clr-accent-rgb: var(--palette-teal-rgb);
+  --clr-accent-hover: var(--palette-teal-hover);
+  --clr-accent-soft: rgba(var(--palette-teal-rgb), 0.12);
+  --clr-accent-ink: var(--palette-white);
+  --clr-surface: var(--palette-cream);
+  --clr-card-hover-border: var(--palette-orange);
+}

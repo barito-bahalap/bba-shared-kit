@@ -1,15 +1,19 @@
 import type { AnchorHTMLAttributes, MouseEvent } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 
-interface SmartLinkProps
-  extends Omit<AnchorHTMLAttributes<HTMLAnchorElement>, "href"> {
+interface SmartLinkProps extends Omit<
+  AnchorHTMLAttributes<HTMLAnchorElement>,
+  "href"
+> {
   href: string;
 }
 
-const isExternal = (href: string) => /^(https?:|mailto:|tel:)/.test(href);
+const EXTERNAL = /^(https?:|mailto:|tel:)/;
+
+export const isExternalHref = (href: string) => EXTERNAL.test(href);
 
 export function scrollToHash(hash: string) {
-  const id = hash.replace(/^#/, "");
+  const id = decodeURIComponent(hash.replace(/^#/, ""));
   if (!id) {
     window.scrollTo({ top: 0, behavior: "smooth" });
     return;
@@ -17,11 +21,26 @@ export function scrollToHash(hash: string) {
   document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
 }
 
-export function SmartLink({ href, onClick, children, ...rest }: SmartLinkProps) {
+function isModifiedClick(event: MouseEvent<HTMLAnchorElement>) {
+  return (
+    event.button !== 0 ||
+    event.metaKey ||
+    event.ctrlKey ||
+    event.shiftKey ||
+    event.altKey
+  );
+}
+
+export function SmartLink({
+  href,
+  onClick,
+  children,
+  ...rest
+}: SmartLinkProps) {
   const location = useLocation();
   const navigate = useNavigate();
 
-  if (isExternal(href)) {
+  if (isExternalHref(href)) {
     const newTab = href.startsWith("http");
     return (
       <a
@@ -36,12 +55,12 @@ export function SmartLink({ href, onClick, children, ...rest }: SmartLinkProps) 
   }
 
   const [path, hash] = href.split("#");
-  const targetPath = path || "/";
+  const targetPath = path || location.pathname;
 
   if (hash !== undefined) {
     const handleClick = (event: MouseEvent<HTMLAnchorElement>) => {
       onClick?.(event);
-      if (event.defaultPrevented) return;
+      if (event.defaultPrevented || isModifiedClick(event)) return;
       event.preventDefault();
       if (location.pathname === targetPath) {
         scrollToHash(hash);
@@ -52,7 +71,7 @@ export function SmartLink({ href, onClick, children, ...rest }: SmartLinkProps) 
     };
 
     return (
-      <a href={href} onClick={handleClick} {...rest}>
+      <a href={`${targetPath}#${hash}`} onClick={handleClick} {...rest}>
         {children}
       </a>
     );
