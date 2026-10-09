@@ -1,7 +1,7 @@
 // Style
 import "./LoadingSpinner.css";
 // Utils
-import { cx } from "@baritobahalap/components";
+import { cx } from "@barito-bahalap/components";
 
 type SpinnerSize = "sm" | "md" | "lg";
 

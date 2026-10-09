@@ -2,11 +2,11 @@ import type { ReactNode } from "react";
 // Style
 import "./SectionHeader.css";
 // Components
-import { Eyebrow } from "@baritobahalap/components";
+import { Eyebrow } from "@barito-bahalap/components";
 // Utils
-import { cx } from "@baritobahalap/components";
+import { cx } from "@barito-bahalap/components";
 // Types
-import type { Brand } from "@baritobahalap/types";
+import type { Brand } from "@barito-bahalap/types";
 
 interface SectionHeaderProps {
   eyebrow?: string;

@@ -2,7 +2,7 @@ import type { ReactNode } from "react";
 // Style
 import "./EmptyState.css";
 // Utils
-import { cx } from "@baritobahalap/components";
+import { cx } from "@barito-bahalap/components";
 
 interface EmptyStateProps {
   title?: ReactNode;

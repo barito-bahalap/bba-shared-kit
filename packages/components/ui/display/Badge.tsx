@@ -2,9 +2,9 @@ import type { ReactNode } from "react";
 // Style
 import "./Badge.css";
 // Components
-import { cx } from "@baritobahalap/components";
+import { cx } from "@barito-bahalap/components";
 // Type
-import type { Brand } from "@baritobahalap/types";
+import type { Brand } from "@barito-bahalap/types";
 
 export type BadgeVariant = "neutral" | "primary" | "accent" | "danger" | "safe";
 

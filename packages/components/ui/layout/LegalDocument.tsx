@@ -1,7 +1,7 @@
 // Style
 import "./LegalDocument.css";
 // Components
-import { Section, SectionHeader } from "@baritobahalap/components";
+import { Section, SectionHeader } from "@barito-bahalap/components";
 
 export interface LegalSectionData {
   id: string;

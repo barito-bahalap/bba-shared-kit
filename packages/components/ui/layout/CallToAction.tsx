@@ -1,7 +1,7 @@
 // Style
 import "./CallToAction.css";
 // Components
-import { Button, Section, SectionHeader } from "@baritobahalap/components";
+import { Button, Section, SectionHeader } from "@barito-bahalap/components";
 
 interface CtaAction {
   label: string;

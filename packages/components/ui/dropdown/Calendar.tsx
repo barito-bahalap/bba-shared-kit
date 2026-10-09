@@ -1,7 +1,7 @@
 // Style
 import "./Calendar.css";
 // Components
-import { Icon } from "@baritobahalap/components";
+import { Icon } from "@barito-bahalap/components";
 
 /**
 Calendar: Styled date input. Use for date range filters and form date fields.

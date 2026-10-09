@@ -4,9 +4,9 @@ import type {
   TextareaHTMLAttributes,
 } from "react";
 // Components
-import { Field, describedBy } from "@baritobahalap/components";
+import { Field, describedBy } from "@barito-bahalap/components";
 // Utils
-import { cx } from "@baritobahalap/components";
+import { cx } from "@barito-bahalap/components";
 
 type FieldOwnProps = {
   id: string;

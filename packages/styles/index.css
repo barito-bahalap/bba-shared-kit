@@ -10,8 +10,8 @@
 @import "./divider.css";
 
 /* Import ONE brand override after this file, per app:
-   @import "@baritobahalap/styles/brands/corporate";
-   @import "@baritobahalap/styles/brands/tech";
-   @import "@baritobahalap/styles/brands/media";
-   @import "@baritobahalap/styles/brands/dashboard";
+   @import "@barito-bahalap/styles/brands/corporate";
+   @import "@barito-bahalap/styles/brands/tech";
+   @import "@barito-bahalap/styles/brands/media";
+   @import "@barito-bahalap/styles/brands/dashboard";
 */

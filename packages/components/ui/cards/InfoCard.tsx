@@ -1,11 +1,11 @@
 // Style
 import "./InfoCard.css";
 // Components
-import { Icon, type IconName } from "@baritobahalap/components";
+import { Icon, type IconName } from "@barito-bahalap/components";
 // Utils
-import { cx } from "@baritobahalap/components";
+import { cx } from "@barito-bahalap/components";
 // Types
-import type { Brand } from "@baritobahalap/types";
+import type { Brand } from "@barito-bahalap/types";
 
 interface InfoCardProps {
   iconName?: IconName;

@@ -1,5 +1,5 @@
 {
-  "name": "@baritobahalap/styles",
+  "name": "@barito-bahalap/styles",
   "version": "0.3.0",
   "main": "./index.css",
   "types": "./index.d.ts",

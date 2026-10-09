@@ -228,10 +228,10 @@ importers:
 
   packages/components:
     dependencies:
-      "@baritobahalap/config":
+      "@barito-bahalap/config":
         specifier: workspace:^
         version: link:../config
-      "@baritobahalap/types":
+      "@barito-bahalap/types":
         specifier: workspace:^
         version: link:../types
       react:
@@ -246,7 +246,7 @@ importers:
 
   packages/config:
     dependencies:
-      "@baritobahalap/types":
+      "@barito-bahalap/types":
         specifier: workspace:^
         version: link:../types
 

@@ -2,9 +2,9 @@ import type { ReactNode } from "react";
 // Style
 import "./Eyebrow.css";
 // Utils
-import { cx } from "@baritobahalap/components";
+import { cx } from "@barito-bahalap/components";
 // Types
-import type { Brand } from "@baritobahalap/types";
+import type { Brand } from "@barito-bahalap/types";
 
 interface EyebrowProps {
   brand?: Brand;

@@ -1,5 +1,5 @@
 {
-  "name": "@baritobahalap/ts-config",
+  "name": "@barito-bahalap/ts-config",
   "version": "0.1.0",
   "files": [
     "declarations.d.ts",
