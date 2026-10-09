@@ -1,12 +1,12 @@
-import type { MouseEvent, ReactNode } from "react";
+import type { HTMLAttributes, MouseEvent, CSSProperties } from "react";
 // Style
 import "./Button.css";
 // Components
-import { SmartLink, Icon, type IconName } from "@barito-bahalap/components";
+import { SmartLink, Icon } from "@barito-bahalap/components";
 // Utils
 import { cx } from "@barito-bahalap/components";
 // Types
-import type { Brand } from "@barito-bahalap/types";
+import type { Brand, IconsType } from "@barito-bahalap/types";
 
 export type ButtonVariant =
   | "primary"
@@ -19,48 +19,71 @@ export type ButtonVariant =
 
 export type ButtonSize = "sm" | "md" | "lg";
 
-type CommonProps = {
+export type ButtonProps = {
+  label?: string;
   variant?: ButtonVariant;
   size?: ButtonSize;
+  fullWidth?: boolean;
+  disabled?: boolean;
+  loading?: boolean;
   href?: string;
+  to?: string; // alias of href (old API)
+  iconName?: IconsType;
+  iconSize?: number;
+  iconAfter?: boolean;
   onClick?: (event: MouseEvent<HTMLElement>) => void;
   type?: "button" | "submit" | "reset";
-  iconName?: IconName;
-  iconAfter?: boolean;
-  loading?: boolean;
-  disabled?: boolean;
-  fullWidth?: boolean;
-  brand?: Brand;
+  tooltip?: string;
+  ariaLabel?: string;
   className?: string;
-  children?: ReactNode;
-};
-
-type LabeledProps = CommonProps & { iconOnly?: false; ariaLabel?: string };
-type IconOnlyProps = CommonProps & { iconOnly: true; ariaLabel: string };
-
-export type ButtonProps = LabeledProps | IconOnlyProps;
+  bgColor?: string;
+  textColor?: string;
+  brand?: Brand;
+  children?: React.ReactNode;
+} & Omit<HTMLAttributes<HTMLElement>, "onClick" | "children">;
 
 const ICON_SIZE: Record<ButtonSize, number> = { sm: 16, md: 18, lg: 20 };
 
-export function Button(props: ButtonProps) {
-  const {
-    variant = "primary",
-    size = "md",
-    href,
-    onClick,
-    type = "button",
-    iconName,
-    iconAfter = false,
-    loading = false,
-    disabled = false,
-    fullWidth = false,
-    brand,
-    className,
-    children,
-    ariaLabel,
-  } = props;
-  const iconOnly = props.iconOnly === true;
+export function Button({
+  label,
+  variant = "primary",
+  size = "md",
+  fullWidth = false,
+  disabled = false,
+  loading = false,
+  href,
+  to,
+  iconName,
+  iconSize,
+  iconAfter = false,
+  onClick,
+  type = "button",
+  tooltip,
+  ariaLabel,
+  className,
+  bgColor,
+  textColor,
+  brand,
+  children,
+  ...rest
+}: ButtonProps) {
+  const text = label ?? children;
+  const iconOnly = !!iconName && !text;
   const inactive = disabled || loading;
+  const link = to ?? href;
+
+  const customStyle: CSSProperties | undefined =
+    bgColor || textColor
+      ? ({
+          ...(bgColor && {
+            "--btn-bg": bgColor,
+            "--btn-border": bgColor,
+            "--btn-bg-hover": bgColor,
+            "--btn-border-hover": bgColor,
+          }),
+          ...(textColor && { "--btn-fg": textColor }),
+        } as CSSProperties)
+      : undefined;
 
   const classes = cx(
     "btn",
@@ -74,25 +97,32 @@ export function Button(props: ButtonProps) {
   );
 
   const icon = iconName ? (
-    <Icon name={iconName} size={ICON_SIZE[size]} />
+    <Icon iconName={iconName} size={iconSize ?? ICON_SIZE[size]} />
   ) : null;
 
   const content = (
     <>
       {loading && <span className="btn__spinner" aria-hidden="true" />}
       {!iconAfter && icon}
-      {!iconOnly && children && <span className="btn__label">{children}</span>}
+      {!iconOnly && text && <span className="btn__label">{text}</span>}
       {iconAfter && icon}
     </>
   );
 
-  if (href) {
+  const shared = {
+    className: classes,
+    style: customStyle,
+    title: tooltip,
+    "data-brand": brand,
+    "aria-label": ariaLabel ?? (iconOnly ? tooltip : undefined),
+    ...rest,
+  };
+
+  if (link) {
     return (
       <SmartLink
-        href={href}
-        className={classes}
-        data-brand={brand}
-        aria-label={ariaLabel}
+        href={link}
+        {...shared}
         aria-disabled={inactive || undefined}
         tabIndex={inactive ? -1 : undefined}
         onClick={(event) => {
@@ -111,9 +141,7 @@ export function Button(props: ButtonProps) {
   return (
     <button
       type={type}
-      className={classes}
-      data-brand={brand}
-      aria-label={ariaLabel}
+      {...shared}
       aria-busy={loading || undefined}
       disabled={inactive}
       onClick={onClick}

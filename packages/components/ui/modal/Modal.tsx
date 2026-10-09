@@ -2,7 +2,7 @@ import { useEffect } from "react";
 // Style
 import "./Modal.css";
 // Components
-import { Button } from "@ampikalteng/components";
+import { Button } from "@barito-bahalap/components";
 
 interface ModalProps {
   open: boolean;

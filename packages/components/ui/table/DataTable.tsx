@@ -6,7 +6,7 @@ import {
   SkeletonTable,
   ErrorMessage,
   EmptyState,
-} from "@ampikalteng/components";
+} from "@barito-bahalap/components";
 
 /**
 DataTable: Dumb table component. Driven by columns config.

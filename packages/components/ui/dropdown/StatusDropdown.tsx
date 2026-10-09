@@ -2,7 +2,21 @@ import { useState, useRef, useEffect } from "react";
 // Style
 import "./StatusDropdown.css";
 // Components
-import { Badge, Icon } from "@ampikalteng/components";
+import { Badge, Icon, type BadgeVariant } from "@barito-bahalap/components";
+
+type StatusItem = {
+  label: string;
+  variant?: BadgeVariant;
+};
+
+type StatusConfig = Record<string, StatusItem>;
+
+type StatusDropdownProps = {
+  id?: string;
+  current?: string;
+  config?: StatusConfig;
+  onChange?: (id?: string, value?: string) => void;
+};
 
 export function StatusDropdown({
   id,
@@ -36,9 +50,15 @@ export function StatusDropdown({
   return (
     <div className="status-dd" ref={ref}>
       {/* Trigger */}
-      <button className="status-dd-trigger" onClick={() => setOpen((p) => !p)}>
-        <Badge variant={currentItem?.variant} label={currentItem?.label} />
-        <Icon iconName="chevronDown" size={12} fill="var(--clr-ink-muted)" />
+      <button
+        type="button"
+        className="status-dd-trigger"
+        aria-haspopup="listbox"
+        aria-expanded={open}
+        onClick={() => setOpen((p) => !p)}
+      >
+        <Badge variant={currentItem?.variant}>{currentItem?.label}</Badge>
+        <Icon iconName="chevronDown" size={12} />
       </button>
 
       {/* Dropdown */}
@@ -46,11 +66,12 @@ export function StatusDropdown({
         <div className="status-dd-menu">
           {Object.entries(config).map(([key, item]) => (
             <button
+              type="button"
               key={key}
               className={`status-dd-item ${key === current ? "active" : ""}`}
               onClick={() => handleSelect(key)}
             >
-              <Badge variant={item.variant} label={item.label} />
+              <Badge variant={item.variant}>{item.label}</Badge>
             </button>
           ))}
         </div>
@@ -58,25 +79,3 @@ export function StatusDropdown({
     </div>
   );
 }
-
-type BadgeVariant =
-  | "primary"
-  | "secondary"
-  | "outline"
-  | "ghost"
-  | "danger"
-  | "safe";
-
-type StatusItem = {
-  label: string;
-  variant?: BadgeVariant;
-};
-
-type StatusConfig = Record<string, StatusItem>;
-
-type StatusDropdownProps = {
-  id?: string;
-  current?: string;
-  config?: StatusConfig;
-  onChange?: (id?: string, value?: string) => void;
-};

@@ -1,7 +1,9 @@
-export interface Person {
+import type { UserRole } from "./enums";
+
+export interface Profile {
   id: string;
   name: string;
-  role: string;
+  role: UserRole;
   bio?: string;
   photoSrc?: string;
   photoAlt?: string;

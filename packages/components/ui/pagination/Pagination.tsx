@@ -1,7 +1,7 @@
 // Style
 import "./Pagination.css";
 // Components
-import { Button } from "@ampikalteng/components";
+import { Button } from "@barito-bahalap/components";
 
 interface PaginationProps {
   page: number;

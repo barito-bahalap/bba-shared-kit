@@ -259,6 +259,12 @@ importers:
 
   packages/contexts:
     dependencies:
+      '@barito-bahalap/types':
+        specifier: workspace:^
+        version: link:../types
+      '@supabase/supabase-js':
+        specifier: ^2.117.3
+        version: 2.117.3
       react:
         specifier: ^18 || ^19
         version: 19.3.0

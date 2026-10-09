@@ -28,13 +28,14 @@ export function CallToAction({
       <div className="cta">
         <SectionHeader title={title} intro={body} id="cta-title" onDark />
         <div className="cta__actions">
-          <Button variant="light" href={primary.href}>
-            {primary.label}
-          </Button>
+          <Button label={primary.label} variant="light" href={primary.href} />
+
           {secondary && (
-            <Button variant="outline-light" href={secondary.href}>
-              {secondary.label}
-            </Button>
+            <Button
+              label={secondary.label}
+              variant="outline-light"
+              href={secondary.href}
+            />
           )}
         </div>
       </div>

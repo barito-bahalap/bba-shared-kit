@@ -1,14 +1,14 @@
 // Style
 import "./InfoCard.css";
 // Components
-import { Icon, type IconName } from "@barito-bahalap/components";
+import { Icon } from "@barito-bahalap/components";
 // Utils
 import { cx } from "@barito-bahalap/components";
 // Types
-import type { Brand } from "@barito-bahalap/types";
+import type { Brand, IconsType } from "@barito-bahalap/types";
 
 interface InfoCardProps {
-  iconName?: IconName;
+  iconName?: IconsType;
   title: string;
   description: string;
   brand?: Brand;
@@ -29,7 +29,7 @@ export function InfoCard({
     >
       {iconName && (
         <span className="info-card__icon">
-          <Icon name={iconName} size={22} />
+          <Icon iconName={iconName} size={22} />
         </span>
       )}
       <h3 className="info-card__title">{title}</h3>

@@ -1,5 +1,7 @@
 import type { FormEvent, ReactNode } from "react";
+// Style
 import "./ContactForm.css";
+// Components
 import { Button } from "../button";
 import { Checkbox, Input, Select, Textarea, type SelectOption } from "../input";
 
@@ -104,9 +106,9 @@ export function ContactForm({
         error={errors.consent}
         onChange={(checked) => onChange("consent", checked)}
       />
-      <Button type="submit" iconName="mail" fullWidth>
-        {submitLabel}
-      </Button>
+
+      <Button label={submitLabel} type="submit" iconName="mail" fullWidth />
+
       {status === "prepared" && (
         <p className="contact-form__status" role="status">
           {statusMessage}
