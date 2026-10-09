@@ -1,5 +1,5 @@
 // Config
-import { supabase } from "@ampikalteng/supabase";
+import { supabase } from "@barito-bahalap/supabase";
 
 // file_path may be a Storage object path relative to `bucket` (real uploads,
 // e.g. 'kalteng/logo-utama.svg'), or already a full external URL (seed /

@@ -1,10 +1,10 @@
 {
   "name": "bba-shared-kit",
   "private": true,
-  "version": "1.1.0",
+  "version": "1.1.1",
   "type": "module",
   "scripts": {
-    "typecheck": "tsc -p packages/components/tsconfig.json",
+    "typecheck": "tsc -p tsconfig.json",
     "publish:all": "pnpm -r publish --no-git-checks"
   },
   "devDependencies": {
@@ -13,6 +13,7 @@
     "react": "^19.2.8",
     "react-dom": "^19.2.8",
     "react-router-dom": "^7.18.4",
-    "typescript": "~6.0.2"
+    "typescript": "~6.0.2",
+    "vite": "^8.3.4"
   }
 }

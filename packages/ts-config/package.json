@@ -1,11 +1,14 @@
 {
   "name": "@barito-bahalap/ts-config",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "files": [
     "declarations.d.ts",
     "vite-env.d.ts"
   ],
   "publishConfig": {
     "registry": "https://npm.pkg.github.com"
+  },
+  "peerDependencies": {
+    "vite": ">=5"
   }
 }
