@@ -9,7 +9,7 @@ export const siteConfig: SiteConfig = {
   description:
     "Barito Bahalap Agency is an independent holding organization in Palangka Raya, Central Kalimantan, overseeing two separate operating brands: Barito Bahalap Tech and Barito Bahalap Media.",
   url: "https://baritobahalap.com",
-  contactEmail: "info@barito-bahalap.com",
+  contactEmail: "info@baritobahalap.com",
   location: "Palangka Raya, Central Kalimantan, Indonesia",
   foundedYear: 2026,
   locale: "en_US",
