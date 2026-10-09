@@ -1,3 +1,3 @@
-import type { SVG_PATHS } from "@barito-bahalap/icons";
+import type { SVG_PATHS } from "@baritobahalap/icons";
 
 export type IconsType = keyof typeof SVG_PATHS;

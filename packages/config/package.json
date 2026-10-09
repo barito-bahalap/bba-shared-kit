@@ -1,5 +1,5 @@
 {
-  "name": "@barito-bahalap/config",
+  "name": "@baritobahalap/config",
   "version": "0.3.0",
   "type": "module",
   "main": "./index.ts",
@@ -8,7 +8,7 @@
     ".": "./index.ts"
   },
   "dependencies": {
-    "@barito-bahalap/types": "workspace:^"
+    "@baritobahalap/types": "workspace:^"
   },
   "publishConfig": {
     "registry": "https://npm.pkg.github.com"

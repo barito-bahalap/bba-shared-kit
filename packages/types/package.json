@@ -1,5 +1,5 @@
 {
-  "name": "@barito-bahalap/types",
+  "name": "@baritobahalap/types",
   "version": "0.3.0",
   "type": "module",
   "main": "./index.ts",

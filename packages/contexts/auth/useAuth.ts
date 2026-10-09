@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import type { Profile, UserRole } from "@barito-bahalap/types";
+import type { Profile, UserRole } from "@baritobahalap/types";
 import { AuthContext, type AuthContextValue } from "./AuthContext";
 
 export function useAuthContext(): AuthContextValue {

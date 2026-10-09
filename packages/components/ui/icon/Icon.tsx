@@ -2,8 +2,8 @@ import React from "react";
 // Style
 import "./Icon.css";
 // Assets
-import { SVG_PATHS } from "@barito-bahalap/icons";
-import type { IconsType } from "@barito-bahalap/types";
+import { SVG_PATHS } from "@baritobahalap/icons";
+import type { IconsType } from "@baritobahalap/types";
 
 // Types
 type SVGShapeType =

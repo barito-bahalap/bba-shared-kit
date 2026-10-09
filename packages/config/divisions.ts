@@ -1,4 +1,4 @@
-import type { Division } from "@barito-bahalap/types";
+import type { Division } from "@baritobahalap/types";
 
 export const divisions: Division[] = [
   {

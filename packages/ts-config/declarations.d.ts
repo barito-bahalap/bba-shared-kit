@@ -1,4 +1,4 @@
-declare module "@barito-bahalap/styles";
+declare module "@baritobahalap/styles";
 
 declare module "*.css";
 declare module "*.scss";

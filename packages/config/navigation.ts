@@ -1,4 +1,4 @@
-import type { FooterGroup, NavLink, SocialLink } from "@barito-bahalap/types";
+import type { FooterGroup, NavLink, SocialLink } from "@baritobahalap/types";
 
 export const mainNav: NavLink[] = [
   { label: "About", href: "/#about" },

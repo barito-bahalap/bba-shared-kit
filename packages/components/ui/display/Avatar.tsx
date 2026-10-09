@@ -1,7 +1,7 @@
 // Style
 import "./Avatar.css";
 // Components
-import { cx } from "@barito-bahalap/components";
+import { cx } from "@baritobahalap/components";
 
 type AvatarSize = "sm" | "md" | "lg" | "xl";
 

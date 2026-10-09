@@ -1,4 +1,4 @@
-import type { SiteConfig } from "@barito-bahalap/types";
+import type { SiteConfig } from "@baritobahalap/types";
 
 export const siteConfig: SiteConfig = {
   name: "Barito Bahalap Agency",

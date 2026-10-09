@@ -2,11 +2,11 @@ import type { MouseEvent, ReactNode } from "react";
 // Style
 import "./Button.css";
 // Components
-import { SmartLink, Icon, type IconName } from "@barito-bahalap/components";
+import { SmartLink, Icon, type IconName } from "@baritobahalap/components";
 // Utils
-import { cx } from "@barito-bahalap/components";
+import { cx } from "@baritobahalap/components";
 // Types
-import type { Brand } from "@barito-bahalap/types";
+import type { Brand } from "@baritobahalap/types";
 
 export type ButtonVariant =
   | "primary"

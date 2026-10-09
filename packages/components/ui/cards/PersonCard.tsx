@@ -1,7 +1,7 @@
 // Style
 import "./PersonCard.css";
 // Components
-import { Avatar } from "@barito-bahalap/components";
+import { Avatar } from "@baritobahalap/components";
 
 interface PersonCardProps {
   name: string;

@@ -6,7 +6,7 @@ import {
   type ReactNode,
 } from "react";
 import type { Session, SupabaseClient } from "@supabase/supabase-js";
-import type { Profile } from "@barito-bahalap/types";
+import type { Profile } from "@baritobahalap/types";
 import { AuthContext } from "./AuthContext";
 
 interface AuthProviderProps {

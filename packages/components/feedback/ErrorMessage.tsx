@@ -1,7 +1,7 @@
 // Style
 import "./ErrorMessage.css";
 // Utils
-import { cx } from "@barito-bahalap/components";
+import { cx } from "@baritobahalap/components";
 
 interface ErrorMessageProps {
   message?: string;

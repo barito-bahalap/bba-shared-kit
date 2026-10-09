@@ -1,5 +1,5 @@
 {
-  "name": "@barito-bahalap/components",
+  "name": "@baritobahalap/components",
   "version": "0.3.0",
   "type": "module",
   "exports": {
@@ -10,8 +10,8 @@
     "./ui": "./ui/index.ts"
   },
   "dependencies": {
-    "@barito-bahalap/config": "workspace:^",
-    "@barito-bahalap/types": "workspace:^"
+    "@baritobahalap/config": "workspace:^",
+    "@baritobahalap/types": "workspace:^"
   },
   "peerDependencies": {
     "react": "^18 || ^19",

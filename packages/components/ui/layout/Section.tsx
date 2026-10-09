@@ -2,9 +2,9 @@ import type { ReactNode } from "react";
 // Style
 import "./Section.css";
 // Utils
-import { cx } from "@barito-bahalap/components";
+import { cx } from "@baritobahalap/components";
 // Types
-import type { Brand } from "@barito-bahalap/types";
+import type { Brand } from "@baritobahalap/types";
 
 type SectionTone = "canvas" | "surface" | "paper" | "dark";
 type SectionWidth = "content" | "narrow" | "wide";

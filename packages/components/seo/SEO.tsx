@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 // Config
-import { siteConfig } from "@barito-bahalap/config";
+import { siteConfig } from "@baritobahalap/config";
 
 type SeoType = "website" | "article";
 

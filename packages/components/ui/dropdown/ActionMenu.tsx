@@ -4,8 +4,8 @@ import { Link } from "react-router-dom";
 // Style
 import "./ActionMenu.css";
 // Components
-import { Icon } from "@barito-bahalap/components";
-import type { IconsType } from "@barito-bahalap/types";
+import { Icon } from "@baritobahalap/components";
+import type { IconsType } from "@baritobahalap/types";
 
 const POPOVER_W = 170;
 const POPOVER_H = 220; // generous estimate
