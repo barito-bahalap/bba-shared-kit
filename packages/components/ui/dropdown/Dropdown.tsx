@@ -1,7 +1,7 @@
 // Style
 import "./Dropdown.css";
 // Components
-import { Icon } from "@ampikalteng/components";
+import { Icon } from "@barito-bahalap/components";
 
 export type DropdownOption = {
   value: string;

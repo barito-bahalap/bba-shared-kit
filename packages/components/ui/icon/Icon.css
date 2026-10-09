@@ -1,4 +1,42 @@
-.icon {
-  flex-shrink: 0;
-  color: inherit;
+.icon-container {
+  width: fit-content !important;
+  align-items: center !important;
+  cursor: inherit;
+}
+
+.app-icon {
+  fill: var(--icon-fill);
+  display: inline-block;
+  vertical-align: middle;
+  transition:
+    transform var(--duration-fast) var(--ease-default),
+    fill var(--duration-fast) var(--ease-default);
+}
+
+.app-icon:hover,
+a:hover .app-icon,
+button:hover .app-icon,
+.btn:hover .app-icon {
+  fill: var(--icon-fill-hover);
+}
+
+.app-icon text {
+  font-size: var(--fs-base);
+  font-family: var(--font-heading);
+}
+
+.app-icon--pointer {
+  cursor: pointer !important;
+}
+
+.icon-svg {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  aspect-ratio: 1;
+  border-radius: var(--radius-circle);
+}
+
+.icon-label {
+  max-width: 80%;
 }
