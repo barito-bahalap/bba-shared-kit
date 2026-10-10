@@ -12,6 +12,8 @@ interface SEOProps {
   noIndex?: boolean;
   type?: SeoType;
   structuredData?: Record<string, unknown> | null;
+  siteName?: string;
+  siteUrl?: string;
 }
 
 function upsert(
@@ -43,9 +45,11 @@ export function SEO({
   noIndex = false,
   type = "website",
   structuredData = null,
+  siteName = siteConfig.name,
+  siteUrl = siteConfig.url,
 }: SEOProps) {
-  const fullTitle = title ? `${title} | ${siteConfig.name}` : siteConfig.name;
-  const url = `${siteConfig.url}${path}`;
+  const fullTitle = title ? `${title} | ${siteName}` : siteName;
+  const url = `${siteUrl}${path}`;
   const ogImage = image ?? siteConfig.ogImage;
   const jsonLd = structuredData ? JSON.stringify(structuredData) : null;
 
@@ -62,7 +66,7 @@ export function SEO({
     upsert(
       "meta",
       { attr: "property", value: "og:site_name" },
-      { content: siteConfig.name },
+      { content: siteName },
     );
     upsert("meta", { attr: "property", value: "og:type" }, { content: type });
     upsert(
@@ -128,7 +132,7 @@ export function SEO({
     } else {
       remove("meta", "name", "robots");
     }
-  }, [fullTitle, description, url, ogImage, noIndex, type]);
+  }, [fullTitle, siteName, description, url, ogImage, noIndex, type]);
 
   useEffect(() => {
     const id = "seo-jsonld";
