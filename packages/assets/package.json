@@ -1,0 +1,14 @@
+{
+  "name": "@barito-bahalap/assets",
+  "version": "1.0.0",
+  "type": "module",
+  "files": [
+    "favicon.svg"
+  ],
+  "exports": {
+    "./favicon.svg": "./favicon.svg"
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
+  }
+}
