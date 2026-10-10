@@ -18,6 +18,7 @@ export interface Division {
   id: DivisionId;
   brand: DivisionBrand;
   name: string;
+  href: string;
   shortName: string;
   descriptor: string;
   externalUrl?: string;

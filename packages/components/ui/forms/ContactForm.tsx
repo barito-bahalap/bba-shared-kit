@@ -100,6 +100,7 @@ export function ContactForm({
         value={values.message}
         error={errors.message}
         onChange={(event) => onChange("message", event.target.value)}
+        rows={3}
       />
       <Checkbox
         id="contact-consent"
@@ -109,7 +110,7 @@ export function ContactForm({
         onChange={(checked) => onChange("consent", checked)}
       />
 
-      <Button label={submitLabel} type="submit" iconName="envelope" fullWidth />
+      <Button label={submitLabel} type="submit" fullWidth />
 
       {status === "prepared" && (
         <p className="contact-form__status" role="status">

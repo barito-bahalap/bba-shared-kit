@@ -45,7 +45,7 @@
   --clr-primary-light: var(--palette-teal-light);
   --clr-primary-hover: var(--palette-orange-hover);
   --clr-primary-soft: rgba(var(--palette-orange-rgb), 0.14);
-  --clr-primary-ink: var(--palette-gray-900);
+  --clr-primary-ink: var(--palette-white);
   --clr-accent: var(--palette-teal);
   --clr-accent-rgb: var(--palette-teal-rgb);
   --clr-accent-hover: var(--palette-teal-hover);

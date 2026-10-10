@@ -36,11 +36,8 @@ export function SectionHeader({
         align === "center" && "section-header--center",
       )}
     >
-      {eyebrow && (
-        <Eyebrow brand={brand} onDark={onDark}>
-          {eyebrow}
-        </Eyebrow>
-      )}
+      {eyebrow && <Eyebrow label={eyebrow} brand={brand} onDark={onDark} />}
+
       <Heading id={id} className="section-header__title">
         {title}
       </Heading>

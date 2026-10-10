@@ -22,6 +22,8 @@ export type ButtonSize = "sm" | "md" | "lg";
 export type ButtonProps = {
   label?: string;
   variant?: ButtonVariant;
+  iconFill?: string;
+  iconFillHover?: string;
   size?: ButtonSize;
   fullWidth?: boolean;
   disabled?: boolean;
@@ -47,6 +49,8 @@ const ICON_SIZE: Record<ButtonSize, number> = { sm: 16, md: 18, lg: 20 };
 export function Button({
   label,
   variant = "primary",
+  iconFill = "var(--clr-ink-on-dark)",
+  iconFillHover = "var(--clr-ink-on-dark)",
   size = "md",
   fullWidth = false,
   disabled = false,
@@ -97,7 +101,12 @@ export function Button({
   );
 
   const icon = iconName ? (
-    <Icon iconName={iconName} size={iconSize ?? ICON_SIZE[size]} />
+    <Icon
+      iconName={iconName}
+      fill={iconFill}
+      fillHover={iconFillHover}
+      size={iconSize ?? ICON_SIZE[size]}
+    />
   ) : null;
 
   const content = (

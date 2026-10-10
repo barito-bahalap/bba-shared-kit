@@ -57,7 +57,7 @@ export function StatusDropdown({
         aria-expanded={open}
         onClick={() => setOpen((p) => !p)}
       >
-        <Badge variant={currentItem?.variant}>{currentItem?.label}</Badge>
+        <Badge label={currentItem?.label} variant={currentItem?.variant} />
         <Icon iconName="chevronDown" size={12} />
       </button>
 
@@ -71,7 +71,7 @@ export function StatusDropdown({
               className={`status-dd-item ${key === current ? "active" : ""}`}
               onClick={() => handleSelect(key)}
             >
-              <Badge variant={item.variant}>{item.label}</Badge>
+              <Badge label={item.label} variant={item.variant} />
             </button>
           ))}
         </div>
