@@ -1,0 +1,50 @@
+.dt-variant {
+  overflow-x: auto;
+  border: 1px solid var(--clr-border, rgba(0, 0, 0, 0.08));
+  border-radius: 0.5rem;
+  background: var(--clr-surface, #fff);
+}
+
+.dt-variant__table {
+  width: 100%;
+  min-width: 36rem;
+  border-collapse: collapse;
+  font-size: 0.9375rem;
+  text-align: left;
+}
+
+.dt-variant__caption {
+  padding: 1rem 1.25rem;
+  text-align: left;
+  font-family: var(--font-control, inherit);
+  font-size: 0.75rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--clr-text-muted, inherit);
+}
+
+.dt-variant__table th,
+.dt-variant__table td {
+  padding: 0.875rem 1.25rem;
+  vertical-align: top;
+  line-height: 1.55;
+  border-top: 1px solid var(--clr-border, rgba(0, 0, 0, 0.08));
+}
+
+.dt-variant__table thead th {
+  font-family: var(--font-control, inherit);
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--clr-text-muted, inherit);
+  background: var(--clr-primary-soft, transparent);
+}
+
+.dt-variant__table tbody th {
+  font-weight: 600;
+  color: var(--clr-text, inherit);
+}
+
+.dt-variant__table td {
+  color: var(--clr-text-muted, inherit);
+}

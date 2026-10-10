@@ -27,10 +27,10 @@ to reweight the same four brand colors differently:
 
 | Brand file             | App                  | Primary | Accent                                      |
 | ---------------------- | -------------------- | ------- | ------------------------------------------- |
-| `brands/corporate.css` | apps/corporate (BBA) | Teal    | Orange (CTA only)                           |
-| `brands/tech.css`      | apps/tech (BBT)      | Teal    | Neutral gray (orange reserved for warnings) |
-| `brands/media.css`     | apps/media (BBM)     | Orange  | Teal                                        |
-| `brands/dashboard.css` | apps/dashboard       | Teal    | Neutral gray                                |
+| `brands/corporate.css` | bba-corporate (BBA) | Teal    | Orange (CTA only)                           |
+| `brands/tech.css`      | bba-tech (BBT)      | Teal    | Neutral gray (orange reserved for warnings) |
+| `brands/media.css`     | bba-media (BBM)     | Orange  | Teal                                        |
+| `brands/dashboard.css` | bba-dashboard       | Teal    | Neutral gray                                |
 
 Components in `@barito-bahalap/ui` should reference only `--clr-*` tokens, never
 `--palette-*` directly — that's what makes one component library look

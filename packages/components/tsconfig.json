@@ -12,5 +12,10 @@
     "skipLibCheck": true,
     "noEmit": true
   },
-  "include": ["**/*.ts", "**/*.tsx"]
+  "include": [
+    "**/*.ts",
+    "**/*.tsx",
+    "../../../bba-tech/src/components/ui/KeyValueList.tsx",
+    "../../../bba-tech/src/components/ui/ProcessSteps.tsx"
+  ]
 }
