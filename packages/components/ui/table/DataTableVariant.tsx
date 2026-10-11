@@ -22,9 +22,9 @@ export function DataTableVariant({
       tabIndex={0}
     >
       <table className="dt-variant__table">
-        {caption ? (
+        {caption && (
           <caption className="dt-variant__caption">{caption}</caption>
-        ) : null}
+        )}
         <thead>
           <tr>
             {columns.map((column) => (

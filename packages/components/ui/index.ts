@@ -8,5 +8,6 @@ export * from "./input";
 export * from "./layout";
 export * from "./modal";
 export * from "./pagination";
+export * from "./sections";
 export * from "./skeleton";
 export * from "./table";

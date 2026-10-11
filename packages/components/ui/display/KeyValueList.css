@@ -1,0 +1,33 @@
+.key-value-list {
+  margin: 0;
+  display: grid;
+  border-top: 1px solid var(--clr-border, rgba(0, 0, 0, 0.08));
+}
+
+.key-value-list__row {
+  display: grid;
+  gap: 0.25rem;
+  padding: 1rem 0;
+  border-bottom: 1px solid var(--clr-border, rgba(0, 0, 0, 0.08));
+}
+
+.key-value-list__label {
+  font-family: var(--font-control, inherit);
+  font-size: 0.6875rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--clr-text-muted, inherit);
+}
+
+.key-value-list__value {
+  margin: 0;
+  line-height: 1.6;
+  color: var(--clr-text, inherit);
+}
+
+@media (min-width: 48rem) {
+  .key-value-list__row {
+    grid-template-columns: 11rem 1fr;
+    gap: 2rem;
+  }
+}

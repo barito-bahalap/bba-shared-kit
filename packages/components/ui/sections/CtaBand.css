@@ -1,0 +1,9 @@
+.cta-band--ink {
+  background: var(--clr-text);
+  color: var(--clr-bg);
+}
+
+.cta-band--ink .cta-band__title,
+.cta-band--ink .cta-band__text {
+  color: inherit;
+}

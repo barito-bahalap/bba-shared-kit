@@ -15,7 +15,7 @@
   "include": [
     "**/*.ts",
     "**/*.tsx",
-    "../../../bba-tech/src/components/ui/KeyValueList.tsx",
-    "../../../bba-tech/src/components/ui/ProcessSteps.tsx"
+    "ui/display/KeyValueList.tsx",
+    "ui/display/ProcessSteps.tsx"
   ]
 }
