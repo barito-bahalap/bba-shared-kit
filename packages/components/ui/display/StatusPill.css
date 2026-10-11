@@ -1,0 +1,26 @@
+.status-pill {
+  display: inline-block;
+  padding: 0.125rem 0.625rem;
+  border: 1px solid var(--clr-border);
+  border-radius: 999px;
+  font-family: var(--font-control, inherit);
+  font-size: 0.75rem;
+  white-space: nowrap;
+  color: var(--clr-text-muted);
+}
+
+.status-pill--positive {
+  border-color: var(--clr-primary);
+  color: var(--clr-primary-ink);
+}
+
+.status-pill--warning {
+  border-color: var(--clr-text);
+  color: var(--clr-text);
+}
+
+.status-pill--negative {
+  background: var(--clr-text);
+  border-color: var(--clr-text);
+  color: var(--clr-bg);
+}
