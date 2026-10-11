@@ -1,0 +1,90 @@
+.field__wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.field__wrap .field__control {
+  width: 100%;
+}
+
+.field__wrap .field__control--lead {
+  padding-left: 2.75rem;
+}
+
+.field__wrap .field__control--trail-1 {
+  padding-right: 2.75rem;
+}
+
+.field__wrap .field__control--trail-2 {
+  padding-right: 5rem;
+}
+
+.field__adornment {
+  display: inline-flex;
+  align-items: center;
+  color: var(--clr-text-muted);
+  pointer-events: none;
+}
+
+.field__adornment--lead {
+  position: absolute;
+  inset-block: 0;
+  left: 0;
+  justify-content: center;
+  width: 2.75rem;
+}
+
+.field__trail {
+  position: absolute;
+  inset-block: 0;
+  right: 0;
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  padding-right: 0.5rem;
+  pointer-events: none;
+}
+
+.field__toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  padding: 0;
+  border: 0;
+  border-radius: 0.375rem;
+  background: transparent;
+  color: var(--clr-text-muted);
+  cursor: pointer;
+  pointer-events: auto;
+}
+
+.field__toggle:hover {
+  color: var(--clr-text);
+}
+
+.field__toggle:focus-visible {
+  outline: 2px solid var(--clr-primary);
+  outline-offset: 1px;
+}
+
+.field__toggle:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.field__note,
+.field__count {
+  display: block;
+  margin-top: 0.375rem;
+  font-family: var(--font-control, inherit);
+  font-size: 0.75rem;
+  color: var(--clr-text-muted);
+}
+
+.field__count {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
