@@ -12,5 +12,10 @@
   },
   "publishConfig": {
     "registry": "https://npm.pkg.github.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/barito-bahalap/bba-shared-kit.git",
+    "directory": "packages/types"
   }
 }

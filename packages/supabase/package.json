@@ -8,5 +8,10 @@
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.117.3"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/barito-bahalap/bba-shared-kit.git",
+    "directory": "packages/supabase"
   }
 }

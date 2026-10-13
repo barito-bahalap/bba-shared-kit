@@ -31,5 +31,10 @@
       "types": "./index.d.ts",
       "default": "./brands/scopes.css"
     }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/barito-bahalap/bba-shared-kit.git",
+    "directory": "packages/styles"
   }
 }

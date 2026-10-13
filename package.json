@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "typecheck": "tsc -p tsconfig.json",
-    "publish:all": "pnpm -r publish --no-git-checks"
+    "publish:all": "pnpm -r --filter \"./packages/*\" publish --no-git-checks"
   },
   "devDependencies": {
     "@types/react": "^19.2.18",
