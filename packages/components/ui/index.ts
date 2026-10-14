@@ -11,3 +11,4 @@ export * from "./pagination";
 export * from "./sections";
 export * from "./skeleton";
 export * from "./table";
+export * from "./navigation";
