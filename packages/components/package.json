@@ -11,7 +11,7 @@
     "./utils": "./utils/index.ts"
   },
   "peerDependencies": {
-    "@barito-bahalap/config": "^1.0.3",
+    "@barito-bahalap/config": "^1.1.0",
     "@barito-bahalap/icons": "^1.1.2",
     "@barito-bahalap/types": "^1.0.5",
     "react": "^18 || ^19",
