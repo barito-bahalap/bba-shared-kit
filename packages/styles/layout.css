@@ -347,6 +347,10 @@ section.zero {
   gap: var(--space-6) !important;
 }
 
+section[id] {
+  scroll-margin-top: var(--topbar-h); /* header height */
+}
+
 /* Tablet: 768px */
 @media (min-width: 768px) {
   .stack {

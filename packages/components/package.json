@@ -1,6 +1,6 @@
 {
   "name": "@barito-bahalap/components",
-  "version": "1.8.1",
+  "version": "1.10.0",
   "type": "module",
   "exports": {
     ".": "./index.ts",
@@ -11,9 +11,9 @@
     "./utils": "./utils/index.ts"
   },
   "peerDependencies": {
-    "@barito-bahalap/config": "^1.1.0",
+    "@barito-bahalap/config": "^1.2.0",
     "@barito-bahalap/icons": "^1.1.2",
-    "@barito-bahalap/types": "^1.0.6",
+    "@barito-bahalap/types": "^1.1.0",
     "react": "^18 || ^19",
     "react-dom": "^18 || ^19",
     "react-router-dom": "^6 || ^7"

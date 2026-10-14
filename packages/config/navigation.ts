@@ -17,22 +17,23 @@ function link(
   key: keyof typeof text,
   href: string,
   locale: ConfigLocale,
+  section?: string,
 ): NavLink {
-  return { label: text[key][locale], href };
+  return { label: text[key][locale], href, section };
 }
 
 export function getMainNav(locale: string): NavLink[] {
   const l = resolveLocale(locale);
   return [
-    link("about", "/#about", l),
-    link("divisions", "/#divisions", l),
-    link("approach", "/#approach", l),
+    link("about", "/", l, "about"),
+    link("divisions", "/", l, "divisions"),
+    link("approach", "/", l, "approach"),
     link("careers", "/careers", l),
   ];
 }
 
 export function getHeaderCta(locale: string): NavLink {
-  return link("contact", "/#contact", resolveLocale(locale));
+  return link("contact", "/", resolveLocale(locale), "contact");
 }
 
 export function getFooterGroups(locale: string): FooterGroup[] {
@@ -41,10 +42,10 @@ export function getFooterGroups(locale: string): FooterGroup[] {
     {
       title: text.company[l],
       links: [
-        link("about", "/#about", l),
-        link("approach", "/#approach", l),
+        link("about", "/", l, "about"),
+        link("approach", "/", l, "approach"),
         link("careers", "/careers", l),
-        link("contact", "/#contact", l),
+        link("contact", "/", l, "contact"),
       ],
     },
     {
