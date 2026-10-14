@@ -4,6 +4,11 @@ import { siteConfig } from "@barito-bahalap/config";
 
 type SeoType = "website" | "article";
 
+export interface SeoAlternate {
+  hrefLang: string;
+  path: string;
+}
+
 interface SEOProps {
   title?: string;
   description?: string;
@@ -14,6 +19,8 @@ interface SEOProps {
   structuredData?: Record<string, unknown> | null;
   siteName?: string;
   siteUrl?: string;
+  locale?: string;
+  alternates?: readonly SeoAlternate[];
 }
 
 function upsert(
@@ -47,11 +54,14 @@ export function SEO({
   structuredData = null,
   siteName = siteConfig.name,
   siteUrl = siteConfig.url,
+  locale = siteConfig.locale,
+  alternates = [],
 }: SEOProps) {
   const fullTitle = title ? `${title} | ${siteName}` : siteName;
   const url = `${siteUrl}${path}`;
   const ogImage = image ?? siteConfig.ogImage;
   const jsonLd = structuredData ? JSON.stringify(structuredData) : null;
+  const alternatesKey = JSON.stringify(alternates);
 
   useEffect(() => {
     document.title = fullTitle;
@@ -83,7 +93,7 @@ export function SEO({
     upsert(
       "meta",
       { attr: "property", value: "og:locale" },
-      { content: siteConfig.locale },
+      { content: locale },
     );
 
     upsert(
@@ -132,7 +142,20 @@ export function SEO({
     } else {
       remove("meta", "name", "robots");
     }
-  }, [fullTitle, siteName, description, url, ogImage, noIndex, type]);
+  }, [fullTitle, siteName, description, url, ogImage, noIndex, type, locale]);
+
+  useEffect(() => {
+    const list = JSON.parse(alternatesKey) as SeoAlternate[];
+    const created = list.map(({ hrefLang, path: alternatePath }) => {
+      const link = document.createElement("link");
+      link.rel = "alternate";
+      link.hreflang = hrefLang;
+      link.href = `${siteUrl}${alternatePath}`;
+      document.head.appendChild(link);
+      return link;
+    });
+    return () => created.forEach((link) => link.remove());
+  }, [alternatesKey, siteUrl]);
 
   useEffect(() => {
     const id = "seo-jsonld";

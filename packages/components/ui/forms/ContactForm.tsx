@@ -26,6 +26,22 @@ export interface ContactFormValues {
 
 export type ContactFormErrors = Partial<Record<ContactField, string>>;
 
+export interface ContactFormLabels {
+  name: string;
+  organization: string;
+  email: string;
+  division: string;
+  message: string;
+}
+
+const DEFAULT_LABELS: ContactFormLabels = {
+  name: "Full name",
+  organization: "Organization",
+  email: "Email address",
+  division: "Enquiry concerns",
+  message: "Message",
+};
+
 interface ContactFormProps {
   values: ContactFormValues;
   errors: ContactFormErrors;
@@ -33,6 +49,7 @@ interface ContactFormProps {
   status: "idle" | "prepared";
   onChange: (field: ContactField, value: string | boolean) => void;
   onSubmit: () => void;
+  labels?: Partial<ContactFormLabels>;
   submitLabel?: string;
   consentLabel?: ReactNode;
   statusMessage?: string;
@@ -45,10 +62,13 @@ export function ContactForm({
   status,
   onChange,
   onSubmit,
+  labels,
   submitLabel = "Prepare email",
   consentLabel = "I agree that the details above may be used to respond to my enquiry.",
   statusMessage = "Your email app should open with the message ready to send. If nothing opens, copy the address shown beside this form.",
 }: ContactFormProps) {
+  const text = { ...DEFAULT_LABELS, ...labels };
+
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     onSubmit();
@@ -59,7 +79,7 @@ export function ContactForm({
       <div className="contact-form__row">
         <Input
           id="contact-name"
-          label="Full name"
+          label={text.name}
           autoComplete="name"
           required
           value={values.name}
@@ -68,7 +88,7 @@ export function ContactForm({
         />
         <Input
           id="contact-organization"
-          label="Organization"
+          label={text.organization}
           autoComplete="organization"
           value={values.organization}
           error={errors.organization}
@@ -77,7 +97,7 @@ export function ContactForm({
       </div>
       <Input
         id="contact-email"
-        label="Email address"
+        label={text.email}
         type="email"
         autoComplete="email"
         required
@@ -87,7 +107,7 @@ export function ContactForm({
       />
       <Select
         id="contact-division"
-        label="Enquiry concerns"
+        label={text.division}
         options={divisionOptions}
         value={values.division}
         error={errors.division}
@@ -95,7 +115,7 @@ export function ContactForm({
       />
       <Textarea
         id="contact-message"
-        label="Message"
+        label={text.message}
         required
         value={values.message}
         error={errors.message}

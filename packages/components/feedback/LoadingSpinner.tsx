@@ -8,6 +8,7 @@ type SpinnerSize = "sm" | "md" | "lg";
 interface LoadingSpinnerProps {
   size?: SpinnerSize;
   message?: string;
+  srLabel?: string;
   block?: boolean;
   full?: boolean;
 }
@@ -15,6 +16,7 @@ interface LoadingSpinnerProps {
 export function LoadingSpinner({
   size = "md",
   message,
+  srLabel = "Please wait...",
   block = false,
   full = false,
 }: LoadingSpinnerProps) {
@@ -33,7 +35,7 @@ export function LoadingSpinner({
       {message ? (
         <small className="spinner__text">{message}</small>
       ) : (
-        <span className="spinner__sr">Loading</span>
+        <span className="spinner__sr">{srLabel}</span>
       )}
     </div>
   );
