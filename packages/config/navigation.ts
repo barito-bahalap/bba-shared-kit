@@ -1,33 +1,63 @@
 import type { FooterGroup, NavLink, SocialLink } from "@barito-bahalap/types";
+import { resolveLocale, type ConfigLocale } from "./i18n";
 
-export const mainNav: NavLink[] = [
-  { label: "About", href: "/#about" },
-  { label: "Divisions", href: "/#divisions" },
-  { label: "Approach", href: "/#approach" },
-  { label: "Leadership", href: "/#leadership" },
-  { label: "Careers", href: "/careers" },
-];
+const text = {
+  about: { en: "About", id: "Tentang" },
+  divisions: { en: "Divisions", id: "Divisi" },
+  approach: { en: "Approach", id: "Pendekatan" },
+  careers: { en: "Careers", id: "Karier" },
+  contact: { en: "Contact", id: "Kontak" },
+  company: { en: "Company", id: "Perusahaan" },
+  legal: { en: "Legal", id: "Legal" },
+  privacy: { en: "Privacy Policy", id: "Kebijakan Privasi" },
+  terms: { en: "Terms of Use", id: "Ketentuan Penggunaan" },
+} as const satisfies Record<string, Record<ConfigLocale, string>>;
 
-export const headerCta: NavLink = { label: "Contact", href: "/#contact" };
+function link(
+  key: keyof typeof text,
+  href: string,
+  locale: ConfigLocale,
+): NavLink {
+  return { label: text[key][locale], href };
+}
 
-export const footerGroups: FooterGroup[] = [
-  {
-    title: "Company",
-    links: [
-      { label: "About", href: "/#about" },
-      { label: "Approach", href: "/#approach" },
-      { label: "Leadership", href: "/#leadership" },
-      { label: "Careers", href: "/careers" },
-      { label: "Contact", href: "/#contact" },
-    ],
-  },
-  {
-    title: "Legal",
-    links: [
-      { label: "Privacy Policy", href: "/privacy" },
-      { label: "Terms of Use", href: "/terms" },
-    ],
-  },
-];
+export function getMainNav(locale: string): NavLink[] {
+  const l = resolveLocale(locale);
+  return [
+    link("about", "/#about", l),
+    link("divisions", "/#divisions", l),
+    link("approach", "/#approach", l),
+    link("careers", "/careers", l),
+  ];
+}
+
+export function getHeaderCta(locale: string): NavLink {
+  return link("contact", "/#contact", resolveLocale(locale));
+}
+
+export function getFooterGroups(locale: string): FooterGroup[] {
+  const l = resolveLocale(locale);
+  return [
+    {
+      title: text.company[l],
+      links: [
+        link("about", "/#about", l),
+        link("approach", "/#approach", l),
+        link("careers", "/careers", l),
+        link("contact", "/#contact", l),
+      ],
+    },
+    {
+      title: text.legal[l],
+      links: [link("privacy", "/privacy", l), link("terms", "/terms", l)],
+    },
+  ];
+}
+
+export const mainNav: NavLink[] = getMainNav("en");
+
+export const headerCta: NavLink = getHeaderCta("en");
+
+export const footerGroups: FooterGroup[] = getFooterGroups("en");
 
 export const socialLinks: SocialLink[] = [];
