@@ -1,0 +1,78 @@
+.lang-switch {
+  --lang-index: 0;
+  --lang-count: 2;
+  --lang-pad: 3px;
+  position: relative;
+  display: inline-grid;
+  grid-auto-flow: column;
+  grid-auto-columns: 1fr;
+  align-items: center;
+  padding: var(--lang-pad);
+  background-color: var(--clr-surface);
+  border: var(--border-w) solid var(--clr-border-strong);
+  border-radius: var(--radius-circle);
+  isolation: isolate;
+}
+
+.lang-switch::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  top: var(--lang-pad);
+  bottom: var(--lang-pad);
+  left: var(--lang-pad);
+  width: calc((100% - 2 * var(--lang-pad)) / var(--lang-count));
+  background-color: var(--clr-paper);
+  border-radius: var(--radius-circle);
+  box-shadow: var(--shadow-sm);
+  transform: translateX(calc(var(--lang-index) * 100%));
+  transition: transform var(--duration-base) var(--ease-default);
+}
+
+.lang-switch__item {
+  min-width: 2.75rem;
+  padding: var(--space-1) var(--space-3);
+  border: 0;
+  border-radius: var(--radius-circle);
+  color: var(--clr-ink-muted);
+  font-family: var(--txt-control-font);
+  font-size: var(--fs-xs);
+  font-weight: var(--fw-semibold);
+  letter-spacing: var(--ls-wider);
+  line-height: var(--lh-snug);
+  text-align: center;
+  text-transform: uppercase;
+  transition: color var(--duration-fast) var(--ease-default);
+}
+
+.lang-switch__item:hover {
+  color: var(--clr-ink);
+}
+
+.lang-switch__item--active,
+.lang-switch__item--active:hover {
+  color: var(--clr-primary);
+}
+
+.lang-switch__item:focus-visible {
+  border-radius: var(--radius-circle);
+}
+
+.lang-switch--on-dark {
+  background-color: rgba(var(--palette-white-rgb), 0.06);
+  border-color: var(--clr-ink-on-dark-muted);
+}
+
+.lang-switch--on-dark::before {
+  background-color: rgba(var(--palette-white-rgb), 0.16);
+  box-shadow: none;
+}
+
+.lang-switch--on-dark .lang-switch__item {
+  color: var(--clr-ink-on-dark-soft);
+}
+
+.lang-switch--on-dark .lang-switch__item:hover,
+.lang-switch--on-dark .lang-switch__item--active {
+  color: var(--clr-ink-on-dark);
+}
