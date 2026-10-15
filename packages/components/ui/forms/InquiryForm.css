@@ -1,0 +1,256 @@
+/* InquiryForm. Remap the --inq-* aliases below to your real design tokens once;
+   everything else in this file reads only from them. Fallbacks keep it legible if a token is missing. */
+.inq {
+  --inq-ink: var(--clr-ink, #16181d);
+  --inq-muted: var(--clr-ink-muted, #5b616e);
+  --inq-surface: var(--clr-surface, #ffffff);
+  --inq-border: var(--clr-border, #cfd4dc);
+  --inq-accent: var(--clr-primary, #1f5f4a);
+  --inq-danger: var(--clr-danger, #b3261e);
+  --inq-radius: var(--radius-md, 10px);
+
+  color: var(--inq-ink);
+  max-width: 44rem;
+}
+
+.inq__progress {
+  margin: 0 0 0.75rem;
+  font-size: 0.8125rem;
+  color: var(--inq-muted);
+  letter-spacing: 0.02em;
+}
+.inq__title {
+  margin: 0 0 0.5rem;
+  font-size: 1.25rem;
+  line-height: 1.3;
+  padding: 0;
+}
+.inq__form,
+.inq__fieldset {
+  display: grid;
+  gap: 1.25rem;
+  border: 0;
+  margin: 0;
+  padding: 0;
+  min-width: 0;
+}
+.inq__fieldset > legend {
+  float: left;
+  width: 100%;
+}
+.inq__fieldset > legend + * {
+  clear: both;
+}
+
+.inq__grid {
+  display: grid;
+  gap: 1.25rem;
+  grid-template-columns: 1fr;
+}
+@media (min-width: 40rem) {
+  .inq__grid {
+    grid-template-columns: 1fr 1fr;
+    column-gap: 1.5rem;
+  }
+}
+
+.inq__field {
+  display: grid;
+  gap: 0.375rem;
+  align-content: start;
+}
+.inq__label {
+  font-size: 0.875rem;
+  font-weight: 600;
+}
+.inq__optional {
+  font-weight: 400;
+  color: var(--inq-muted);
+}
+.inq__hint {
+  margin: 0;
+  font-size: 0.8125rem;
+  color: var(--inq-muted);
+}
+.inq__error {
+  margin: 0;
+  font-size: 0.8125rem;
+  color: var(--inq-danger);
+}
+.inq__error--form {
+  padding: 0.75rem 1rem;
+  border: 1px solid var(--inq-danger);
+  border-radius: var(--inq-radius);
+}
+
+.inq__input {
+  width: 100%;
+  box-sizing: border-box;
+  min-height: 2.75rem; /* comfortable touch target */
+  padding: 0.625rem 0.75rem;
+  font: inherit;
+  color: inherit;
+  background: var(--inq-surface);
+  border: 1px solid var(--inq-border);
+  border-radius: var(--inq-radius);
+}
+.inq__textarea {
+  min-height: 8rem;
+  resize: vertical;
+}
+.inq__input:focus-visible,
+.inq__check input:focus-visible,
+.inq__choice input:focus-visible + .inq__choice-title,
+.inq__ref-copy:focus-visible {
+  outline: 2px solid var(--inq-accent);
+  outline-offset: 2px;
+}
+.has-error > .inq__input {
+  border-color: var(--inq-danger);
+}
+
+/* step 1 */
+.inq__choices {
+  display: grid;
+  gap: 0.75rem;
+  grid-template-columns: 1fr;
+}
+@media (min-width: 40rem) {
+  .inq__choices {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+.inq__choice {
+  position: relative;
+  display: grid;
+  gap: 0.25rem;
+  align-content: start;
+  padding: 1rem;
+  background: var(--inq-surface);
+  border: 1px solid var(--inq-border);
+  border-radius: var(--inq-radius);
+  cursor: pointer;
+}
+.inq__choice:hover {
+  border-color: var(--inq-accent);
+}
+.inq__choice.is-selected {
+  border-color: var(--inq-accent);
+  box-shadow: inset 0 0 0 1px var(--inq-accent);
+}
+.inq__choice input {
+  position: absolute;
+  opacity: 0;
+  inset: 0;
+  margin: 0;
+  cursor: pointer;
+}
+.inq__choice-title {
+  font-weight: 600;
+}
+.inq__choice-desc {
+  font-size: 0.875rem;
+  color: var(--inq-muted);
+}
+
+/* consent */
+.inq__check {
+  display: flex;
+  gap: 0.625rem;
+  align-items: flex-start;
+  font-size: 0.875rem;
+  line-height: 1.45;
+}
+.inq__check input {
+  margin-top: 0.2rem;
+  width: 1.125rem;
+  height: 1.125rem;
+  flex: none;
+  accent-color: var(--inq-accent);
+}
+.inq__check a {
+  color: var(--inq-accent);
+  text-underline-offset: 0.15em;
+}
+
+.inq__actions {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  align-items: center;
+}
+.inq__turnstile:empty {
+  display: none;
+}
+
+/* honeypot: off-screen rather than display:none, which some bots detect */
+.inq__hp {
+  position: absolute;
+  left: -10000px;
+  top: auto;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
+.inq__sr {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+/* success */
+.inq__success {
+  display: grid;
+  gap: 1rem;
+  justify-items: start;
+}
+.inq__success .inq__title:focus {
+  outline: none;
+}
+.inq__ref {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 0.875rem;
+  align-items: center;
+  padding: 0.875rem 1rem;
+  background: var(--inq-surface);
+  border: 1px solid var(--inq-border);
+  border-radius: var(--inq-radius);
+}
+.inq__ref-label {
+  font-size: 0.8125rem;
+  color: var(--inq-muted);
+}
+.inq__ref-value {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 1.125rem;
+  font-weight: 600;
+  user-select: all;
+}
+.inq__ref-copy {
+  font: inherit;
+  font-size: 0.8125rem;
+  padding: 0.25rem 0.625rem;
+  cursor: pointer;
+  color: var(--inq-accent);
+  background: transparent;
+  border: 1px solid currentColor;
+  border-radius: 999px;
+}
+.inq__commitment {
+  margin: 0;
+  font-weight: 600;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .inq__choice,
+  .inq__input {
+    transition:
+      border-color 120ms ease,
+      box-shadow 120ms ease;
+  }
+}
