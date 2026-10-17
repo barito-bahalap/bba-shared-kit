@@ -98,7 +98,7 @@ an app's brand file is enough to reskin every shared component.
   --clr-primary-hover: var(--palette-teal-hover);
   --clr-primary-soft: rgba(var(--palette-teal-rgb), 0.12);
   /* White text on teal passes AA; brand files that promote orange to
-     primary (BBM) must override this to dark ink — see brands/media.css */
+     primary (BBM) must override this to dark ink, see brands/media.css */
   --clr-primary-ink: var(--palette-white);
 
   --clr-accent: var(--palette-orange);
@@ -106,7 +106,7 @@ an app's brand file is enough to reskin every shared component.
   --clr-accent-hover: var(--palette-orange-hover);
   --clr-accent-soft: rgba(var(--palette-orange-rgb), 0.14);
   /* Dark ink, not white: white-on-orange fails WCAG AA contrast (~3.3:1) */
-  --clr-accent-ink: var(--palette-gray-900);
+  --clr-accent-ink: var(--palette-gray-0);
 
   --clr-cream: var(--palette-cream);
   --clr-cream-rgb: var(--palette-cream-rgb);

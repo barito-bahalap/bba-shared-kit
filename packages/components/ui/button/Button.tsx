@@ -103,7 +103,7 @@ export function Button({
   const icon = iconName ? (
     <Icon
       iconName={iconName}
-      fill={iconFill}
+      fill={variant === "accent" ? "var(--clr-accent-ink)" : iconFill}
       fillHover={iconFillHover}
       size={iconSize ?? ICON_SIZE[size]}
     />

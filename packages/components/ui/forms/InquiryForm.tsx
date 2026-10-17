@@ -1,34 +1,33 @@
 import { useEffect, useRef, useState } from "react";
-import type { ChangeEvent, FormEvent, ReactNode } from "react";
+import type { ChangeEvent, FormEvent } from "react";
 // Style
 import "./InquiryForm.css";
+// Hooks
+import { useTurnstile } from "./useTurnstile";
 // Components
-import { Button, cx } from "@barito-bahalap/components";
+import { Button, Checkbox, Dropdown } from "@barito-bahalap/components";
+import { Input, Textarea } from "@barito-bahalap/components";
+import { cx } from "@barito-bahalap/components";
 // Types
-import { inquiryCopy } from "./inquiryCopy";
+import type { Brand } from "@barito-bahalap/types";
 import type {
   InquiryDivision,
   InquiryFormCopy,
   InquiryLocale,
 } from "./inquiryCopy";
-import { useTurnstile } from "./useTurnstile";
-import type { Brand } from "@barito-bahalap/types";
+// Utils
+import { inquiryCopy } from "./inquiryCopy";
 
 export interface InquiryFormProps {
-  /** Full URL of the bba-api inquiry endpoint. */
-  endpoint: string;
-  /** Public Cloudflare Turnstile site key (safe to ship to the browser). */
-  turnstileSiteKey: string;
+  endpoint: string; /** Full URL of the bba-api inquiry endpoint. */
+  turnstileSiteKey?: string; /** Public Cloudflare Turnstile site key. Leave empty/undefined to run without captcha (the API must also have no TURNSTILE_SECRET_KEY). */
   locale: InquiryLocale;
-  /** Divisions offered in step 1. With a single entry, step 1 is skipped. Default: bbt, bbm, partnership. */
-  divisions?: InquiryDivision[];
+  divisions?: InquiryDivision[]; /** Divisions offered in step 1. With a single entry, step 1 is skipped. Default: bbt, bbm, partnership. */
   defaultDivision?: InquiryDivision;
   privacyHref: string;
   brand?: Brand;
-  /** Adds the optional budget and timeline selects (9 fields instead of 7). */
-  showProjectDetails?: boolean;
-  /** Override any string; defaults come from inquiryCopy[locale]. */
-  copy?: InquiryFormCopy;
+  showProjectDetails?: boolean; /** Adds the optional budget and timeline selects (9 fields instead of 7). */
+  copy?: InquiryFormCopy; /** Override any string; defaults come from inquiryCopy[locale]. */
   onSuccess?: (ref: string | null) => void;
   className?: string;
 }
@@ -93,6 +92,17 @@ const FIELD_ORDER: FieldKey[] = [
   "message",
   "consent",
 ];
+// Checkbox does not forward `name`, so focus targets use ids where one exists.
+const FIELD_ID: Partial<Record<FieldKey, string>> = {
+  name: "inq-name",
+  email: "inq-email",
+  whatsapp: "inq-wa",
+  org_type: "inq-org-type",
+  organization: "inq-org",
+  service_interest: "inq-service",
+  message: "inq-message",
+  consent: "inq-consent",
+};
 
 // Mirrors the server rules for fast feedback. The server stays authoritative.
 function normalizeWhatsapp(input: string): string {
@@ -139,58 +149,6 @@ function validate(v: Values, needsService: boolean): Errors {
   return e;
 }
 
-interface FieldProps {
-  id: string;
-  label: string;
-  error?: string;
-  hint?: string;
-  optionalLabel?: string;
-  children: (a11y: {
-    id: string;
-    "aria-invalid": boolean;
-    "aria-describedby": string | undefined;
-  }) => ReactNode;
-}
-
-function Field({
-  id,
-  label,
-  error,
-  hint,
-  optionalLabel,
-  children,
-}: FieldProps) {
-  const described =
-    [error ? `${id}-err` : null, hint ? `${id}-hint` : null]
-      .filter(Boolean)
-      .join(" ") || undefined;
-  return (
-    <div className={cx("inq__field", error && "has-error")}>
-      <label className="inq__label" htmlFor={id}>
-        {label}
-        {optionalLabel && (
-          <span className="inq__optional"> ({optionalLabel})</span>
-        )}
-      </label>
-      {children({
-        id,
-        "aria-invalid": Boolean(error),
-        "aria-describedby": described,
-      })}
-      {hint && !error && (
-        <p className="inq__hint" id={`${id}-hint`}>
-          {hint}
-        </p>
-      )}
-      {error && (
-        <p className="inq__error" id={`${id}-err`}>
-          {error}
-        </p>
-      )}
-    </div>
-  );
-}
-
 export function InquiryForm({
   endpoint,
   turnstileSiteKey,
@@ -227,11 +185,13 @@ export function InquiryForm({
   const inFlight = useRef(false);
   const openedAt = useRef(0);
 
+  const captchaOn = Boolean(turnstileSiteKey);
   const turnstile = useTurnstile(
-    turnstileSiteKey,
-    step === 2 && status !== "success",
+    turnstileSiteKey ?? "",
+    captchaOn && step === 2 && status !== "success",
     locale,
   );
+  const verified = !captchaOn || Boolean(turnstile.token);
 
   const serviceOptions = values.division
     ? (t.services[values.division] ?? [])
@@ -248,6 +208,8 @@ export function InquiryForm({
 
   const message = (code: string | undefined) =>
     code ? (t.errors[code] ?? t.errors.invalid) : undefined;
+
+  const optionalLabel = (label: string) => `${label} (${t.step2.optional})`;
 
   const set = <K extends keyof Values>(
     key: K,
@@ -269,8 +231,10 @@ export function InquiryForm({
 
   const focusFirst = (errs: Errors) => {
     const first = FIELD_ORDER.find((k) => errs[k]);
-    if (first)
-      formRef.current?.querySelector<HTMLElement>(`[name="${first}"]`)?.focus();
+    if (!first) return;
+    const id = FIELD_ID[first];
+    const selector = id ? `#${id}` : `[name="${first}"]`;
+    formRef.current?.querySelector<HTMLElement>(selector)?.focus();
   };
 
   const chooseDivision = (division: InquiryDivision) => {
@@ -292,7 +256,7 @@ export function InquiryForm({
 
     setSubmitted(true);
     const errs = validate(values, needsService);
-    if (!turnstile.token)
+    if (!verified)
       errs._form =
         turnstile.state === "error" ? "captcha_load" : "captcha_required";
     setErrors(errs);
@@ -325,7 +289,7 @@ export function InquiryForm({
       referrer: document.referrer || undefined,
       company_website: values.honeypot,
       t: Date.now() - openedAt.current,
-      turnstile_token: turnstile.token,
+      turnstile_token: turnstile.token ?? undefined,
     };
 
     let succeeded = false;
@@ -495,227 +459,141 @@ export function InquiryForm({
             </h3>
 
             <div className="inq__grid">
-              <Field
+              <Input
                 id="inq-name"
+                name="name"
                 label={t.fields.name}
                 error={message(errors.name)}
-              >
-                {(a) => (
-                  <input
-                    {...a}
-                    className="inq__input"
-                    name="name"
-                    type="text"
-                    autoComplete="name"
-                    maxLength={120}
-                    value={values.name}
-                    onChange={onText("name", "name")}
-                  />
-                )}
-              </Field>
-              <Field
+                type="text"
+                autoComplete="name"
+                maxLength={120}
+                value={values.name}
+                onChange={onText("name", "name")}
+              />
+              <Input
                 id="inq-email"
+                name="email"
                 label={t.fields.email}
                 error={message(errors.email)}
-              >
-                {(a) => (
-                  <input
-                    {...a}
-                    className="inq__input"
-                    name="email"
-                    type="email"
-                    autoComplete="email"
-                    maxLength={254}
-                    value={values.email}
-                    onChange={onText("email", "email")}
-                  />
-                )}
-              </Field>
-              <Field
+                type="email"
+                autoComplete="email"
+                maxLength={254}
+                value={values.email}
+                onChange={onText("email", "email")}
+              />
+              <Dropdown
                 id="inq-org-type"
+                name="org_type"
                 label={t.fields.orgType}
                 error={message(errors.org_type)}
-              >
-                {(a) => (
-                  <select
-                    {...a}
-                    className="inq__input"
-                    name="org_type"
-                    value={values.orgType}
-                    onChange={onText("orgType", "org_type")}
-                  >
-                    <option value="">{t.fields.choose}</option>
-                    {t.orgTypes.map((o) => (
-                      <option key={o.value} value={o.value}>
-                        {o.label}
-                      </option>
-                    ))}
-                  </select>
-                )}
-              </Field>
-              <Field
+                placeholder={t.fields.choose}
+                options={t.orgTypes}
+                value={values.orgType}
+                onChange={onText("orgType", "org_type")}
+                lockPlaceholderAfterSelect
+                full
+              />
+              <Input
                 id="inq-org"
-                label={t.fields.organization}
-                optionalLabel={
-                  values.orgType === "individual" ? t.step2.optional : undefined
+                name="organization"
+                label={
+                  values.orgType === "individual"
+                    ? optionalLabel(t.fields.organization)
+                    : t.fields.organization
                 }
                 error={message(errors.organization)}
-              >
-                {(a) => (
-                  <input
-                    {...a}
-                    className="inq__input"
-                    name="organization"
-                    type="text"
-                    autoComplete="organization"
-                    maxLength={160}
-                    value={values.organization}
-                    onChange={onText("organization", "organization")}
-                  />
-                )}
-              </Field>
-              <Field
+                type="text"
+                autoComplete="organization"
+                maxLength={160}
+                value={values.organization}
+                onChange={onText("organization", "organization")}
+              />
+              <Input
                 id="inq-wa"
-                label={t.fields.whatsapp}
-                optionalLabel={t.step2.optional}
+                name="whatsapp"
+                label={optionalLabel(t.fields.whatsapp)}
                 hint={t.fields.whatsappHint}
                 error={message(errors.whatsapp)}
-              >
-                {(a) => (
-                  <input
-                    {...a}
-                    className="inq__input"
-                    name="whatsapp"
-                    type="tel"
-                    inputMode="tel"
-                    autoComplete="tel"
-                    maxLength={30}
-                    value={values.whatsapp}
-                    onChange={onText("whatsapp", "whatsapp")}
-                  />
-                )}
-              </Field>
+                type="tel"
+                inputMode="tel"
+                autoComplete="tel"
+                maxLength={30}
+                value={values.whatsapp}
+                onChange={onText("whatsapp", "whatsapp")}
+              />
               {needsService && (
-                <Field
+                <Dropdown
                   id="inq-service"
+                  name="service_interest"
                   label={t.fields.serviceInterest}
                   error={message(errors.service_interest)}
-                >
-                  {(a) => (
-                    <select
-                      {...a}
-                      className="inq__input"
-                      name="service_interest"
-                      value={values.serviceInterest}
-                      onChange={onText("serviceInterest", "service_interest")}
-                    >
-                      <option value="">{t.fields.choose}</option>
-                      {serviceOptions.map((o) => (
-                        <option key={o.value} value={o.value}>
-                          {o.label}
-                        </option>
-                      ))}
-                    </select>
-                  )}
-                </Field>
+                  placeholder={t.fields.choose}
+                  options={serviceOptions}
+                  value={values.serviceInterest}
+                  onChange={onText("serviceInterest", "service_interest")}
+                  lockPlaceholderAfterSelect
+                  full
+                />
               )}
               {showProjectDetails && (
                 <>
-                  <Field
+                  <Dropdown
                     id="inq-budget"
-                    label={t.fields.budgetRange}
-                    optionalLabel={t.step2.optional}
-                  >
-                    {(a) => (
-                      <select
-                        {...a}
-                        className="inq__input"
-                        name="budget_range"
-                        value={values.budgetRange}
-                        onChange={onText("budgetRange", "budget_range")}
-                      >
-                        <option value="">{t.fields.choose}</option>
-                        {t.budgets.map((o) => (
-                          <option key={o.value} value={o.value}>
-                            {o.label}
-                          </option>
-                        ))}
-                      </select>
-                    )}
-                  </Field>
-                  <Field
+                    name="budget_range"
+                    label={optionalLabel(t.fields.budgetRange)}
+                    placeholder={t.fields.choose}
+                    options={t.budgets}
+                    value={values.budgetRange}
+                    onChange={onText("budgetRange", "budget_range")}
+                    full
+                  />
+                  <Dropdown
                     id="inq-timeline"
-                    label={t.fields.timeline}
-                    optionalLabel={t.step2.optional}
-                  >
-                    {(a) => (
-                      <select
-                        {...a}
-                        className="inq__input"
-                        name="timeline"
-                        value={values.timeline}
-                        onChange={onText("timeline", "timeline")}
-                      >
-                        <option value="">{t.fields.choose}</option>
-                        {t.timelines.map((o) => (
-                          <option key={o.value} value={o.value}>
-                            {o.label}
-                          </option>
-                        ))}
-                      </select>
-                    )}
-                  </Field>
+                    name="timeline"
+                    label={optionalLabel(t.fields.timeline)}
+                    placeholder={t.fields.choose}
+                    options={t.timelines}
+                    value={values.timeline}
+                    onChange={onText("timeline", "timeline")}
+                    full
+                  />
                 </>
               )}
             </div>
 
-            <Field
+            <Textarea
               id="inq-message"
+              name="message"
               label={t.fields.message}
               hint={t.fields.messageHint}
               error={message(errors.message)}
-            >
-              {(a) => (
-                <textarea
-                  {...a}
-                  className="inq__input inq__textarea"
-                  name="message"
-                  rows={5}
-                  maxLength={5000}
-                  value={values.message}
-                  onChange={onText("message", "message")}
-                />
-              )}
-            </Field>
+              rows={5}
+              maxLength={5000}
+              value={values.message}
+              onChange={onText("message", "message")}
+            />
 
             {/* Honeypot: invisible to people and assistive tech, irresistible to form-filling bots. */}
             <div className="inq__hp" aria-hidden="true">
-              <label>
-                Website
-                <input
-                  type="text"
-                  name="company_website"
-                  tabIndex={-1}
-                  autoComplete="off"
-                  value={values.honeypot}
-                  onChange={(e) => set("honeypot", e.target.value)}
-                />
-              </label>
+              <Input
+                id="inq-hp"
+                name="company_website"
+                label="Website"
+                type="text"
+                tabIndex={-1}
+                autoComplete="off"
+                value={values.honeypot}
+                onChange={(e) => set("honeypot", e.target.value)}
+              />
             </div>
 
-            <div className={cx("inq__consent", errors.consent && "has-error")}>
-              <label className="inq__check">
-                <input
-                  type="checkbox"
-                  name="consent"
-                  checked={values.consent}
-                  aria-invalid={Boolean(errors.consent)}
-                  aria-describedby={
-                    errors.consent ? "inq-consent-err" : undefined
-                  }
-                  onChange={(e) => set("consent", e.target.checked, "consent")}
-                />
-                <span>
+            <Checkbox
+              id="inq-consent"
+              checked={values.consent}
+              error={message(errors.consent)}
+              onChange={(checked) => set("consent", checked, "consent")}
+              label={
+                <>
                   {t.consent.before}
                   <a
                     href={privacyHref}
@@ -725,14 +603,9 @@ export function InquiryForm({
                     {t.consent.link}
                   </a>
                   {t.consent.after}
-                </span>
-              </label>
-              {errors.consent && (
-                <p className="inq__error" id="inq-consent-err">
-                  {message(errors.consent)}
-                </p>
-              )}
-            </div>
+                </>
+              }
+            />
 
             <div ref={turnstile.containerRef} className="inq__turnstile" />
 
@@ -760,12 +633,12 @@ export function InquiryForm({
                 label={
                   status === "submitting"
                     ? t.step2.submitting
-                    : turnstile.token
+                    : verified
                       ? t.step2.submit
                       : t.step2.verifying
                 }
                 loading={status === "submitting"}
-                disabled={!turnstile.token}
+                disabled={!verified}
                 brand={brand}
               />
             </div>

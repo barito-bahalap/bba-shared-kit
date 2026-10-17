@@ -8,7 +8,7 @@ system (reset, typography, layout, cards, motion, divider) plus the same
 brand-override pattern, now under `brands/`. Use this one; don't keep both,
 or you'll have two competing sources of truth for `--clr-primary`.
 
-Keep `packages/config` (if you still want it) for build tooling only —
+Keep `packages/config` (if you still want it) for build tooling only,
 eslint config, tsconfig base, Tailwind preset if you use one. This package
 is pure CSS custom properties and has no Tailwind dependency, so it works
 whether or not the app also uses Tailwind.
@@ -17,23 +17,23 @@ whether or not the app also uses Tailwind.
 
 Two-layer tokens, same discipline as your e-palugada reference:
 
-- `--palette-*` — raw values. Never reference these in component CSS.
-- `--clr-*` — semantic aliases. Components only ever use these.
+- `--palette-*`, raw values. Never reference these in component CSS.
+- `--clr-*`, semantic aliases. Components only ever use these.
 
 `tokens.css` sets BBA's base weighting (teal primary, orange accent).
 Each app then imports exactly one file from `brands/` which overrides
 `--clr-primary` / `--clr-accent` / `--clr-surface` / `--clr-primary-ink`
 to reweight the same four brand colors differently:
 
-| Brand file             | App                  | Primary | Accent                                      |
-| ---------------------- | -------------------- | ------- | ------------------------------------------- |
+| Brand file             | App                 | Primary | Accent                                      |
+| ---------------------- | ------------------- | ------- | ------------------------------------------- |
 | `brands/corporate.css` | bba-corporate (BBA) | Teal    | Orange (CTA only)                           |
 | `brands/tech.css`      | bba-tech (BBT)      | Teal    | Neutral gray (orange reserved for warnings) |
 | `brands/media.css`     | bba-media (BBM)     | Orange  | Teal                                        |
 | `brands/dashboard.css` | bba-dashboard       | Teal    | Neutral gray                                |
 
 Components in `@barito-bahalap/ui` should reference only `--clr-*` tokens, never
-`--palette-*` directly — that's what makes one component library look
+`--palette-*` directly, that's what makes one component library look
 right across four differently-weighted brands.
 
 ## Usage
@@ -59,7 +59,7 @@ it overrides variables the base file sets.
   Sans Code (mono), per your spec.
 - Cut: `.red`/`.green` dev helpers, project-specific comment
   references, and the `--fw-extrabold`/`--fw-black` weight tokens
-  (PT Serif only reliably supports 400/700 — anything heavier gets
+  (PT Serif only reliably supports 400/700, anything heavier gets
   faked by the browser rather than rendered as a real weight).
 - Added: `.card.bordered` variant (shadow-free, for document/spec-style
   content where a shadow reads too "consumer app" for a BUMN/gov
@@ -71,7 +71,7 @@ it overrides variables the base file sets.
 ## Open items
 
 - Confirm the exact Google Sans / Google Sans Code weight axis at
-  fonts.google.com before shipping — both fonts opened up recently
+  fonts.google.com before shipping, both fonts opened up recently
   (Aug/Dec 2025) and the import URL here is a best-effort weight list.
 - "control" typography defaults to `text-transform: capitalize`
   globally per your spec (not just in the dashboard). Change

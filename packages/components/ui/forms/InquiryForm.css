@@ -83,30 +83,16 @@
   border-radius: var(--inq-radius);
 }
 
-.inq__input {
-  width: 100%;
-  box-sizing: border-box;
-  min-height: 2.75rem; /* comfortable touch target */
-  padding: 0.625rem 0.75rem;
-  font: inherit;
-  color: inherit;
-  background: var(--inq-surface);
-  border: 1px solid var(--inq-border);
-  border-radius: var(--inq-radius);
-}
 .inq__textarea {
   min-height: 8rem;
   resize: vertical;
 }
-.inq__input:focus-visible,
+
 .inq__check input:focus-visible,
 .inq__choice input:focus-visible + .inq__choice-title,
 .inq__ref-copy:focus-visible {
   outline: 2px solid var(--inq-accent);
   outline-offset: 2px;
-}
-.has-error > .inq__input {
-  border-color: var(--inq-danger);
 }
 
 /* step 1 */
@@ -152,27 +138,7 @@
   font-size: 0.875rem;
   color: var(--inq-muted);
 }
-
-/* consent */
-.inq__check {
-  display: flex;
-  gap: 0.625rem;
-  align-items: flex-start;
-  font-size: 0.875rem;
-  line-height: 1.45;
-}
-.inq__check input {
-  margin-top: 0.2rem;
-  width: 1.125rem;
-  height: 1.125rem;
-  flex: none;
-  accent-color: var(--inq-accent);
-}
-.inq__check a {
-  color: var(--inq-accent);
-  text-underline-offset: 0.15em;
-}
-
+ 
 .inq__actions {
   display: flex;
   gap: 0.75rem;
@@ -247,8 +213,7 @@
 }
 
 @media (prefers-reduced-motion: no-preference) {
-  .inq__choice,
-  .inq__input {
+  .inq__choice {
     transition:
       border-color 120ms ease,
       box-shadow 120ms ease;

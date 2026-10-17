@@ -61,7 +61,7 @@ rounding, gentle hover lift. No hard-offset shadows, no thick
 .card.flat {
   box-shadow: none;
 }
-/* Bordered, no shadow: reads more "document/report" than "app card" —
+/* Bordered, no shadow: reads more "document/report" than "app card"
    use for compliance, spec, or credential-adjacent content */
 .card.bordered {
   box-shadow: none;

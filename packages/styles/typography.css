@@ -88,7 +88,7 @@ a {
   transition: border-color var(--duration-fast) var(--ease-default);
 }
 
-/* Controls: buttons, inputs, labels — Google Sans, capitalize */
+/* Controls: buttons, inputs, labels: Google Sans, capitalize */
 button,
 input,
 select,

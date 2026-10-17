@@ -28,23 +28,23 @@
 .badge--primary {
   background-color: var(--clr-primary-soft);
   border-color: rgba(var(--clr-primary-rgb), 0.35);
-  color: var(--clr-ink);
+  color: var(--clr-ink) !important;
 }
 
 .badge--accent {
   background-color: var(--clr-accent-soft);
   border-color: rgba(var(--clr-accent-rgb), 0.35);
-  color: var(--clr-ink);
+  color: var(--clr-accent-ink) !important;
 }
 
 .badge--danger {
   background-color: var(--clr-danger-soft);
   border-color: var(--clr-danger);
-  color: var(--clr-danger);
+  color: var(--clr-danger) !important;
 }
 
 .badge--safe {
   background-color: var(--clr-safe-soft);
   border-color: var(--clr-safe);
-  color: var(--clr-ink);
+  color: var(--clr-ink) !important;
 }
