@@ -1,6 +1,6 @@
 {
   "name": "@barito-bahalap/components",
-  "version": "1.15.3",
+  "version": "1.15.5",
   "type": "module",
   "exports": {
     ".": "./index.ts",

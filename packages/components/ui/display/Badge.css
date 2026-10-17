@@ -28,7 +28,7 @@
 .badge--primary {
   background-color: var(--clr-primary-soft);
   border-color: rgba(var(--clr-primary-rgb), 0.35);
-  color: var(--clr-ink) !important;
+  color: var(--clr-ink);
 }
 
 .badge--accent {
