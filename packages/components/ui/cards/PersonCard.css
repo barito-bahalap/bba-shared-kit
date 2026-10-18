@@ -21,7 +21,7 @@
   font-family: var(--font-heading);
   font-size: var(--fs-display);
   font-weight: var(--fw-bold);
-  color: var(--clr-ink-faint);
+  color: var(--clr-surface);
   line-height: 1;
 }
 
