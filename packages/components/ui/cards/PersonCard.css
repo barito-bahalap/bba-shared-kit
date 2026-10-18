@@ -21,7 +21,7 @@
   font-family: var(--font-heading);
   font-size: var(--fs-display);
   font-weight: var(--fw-bold);
-  color: var(--clr-surface);
+  color: var(--clr-surface) !important;
   line-height: 1;
 }
 
