@@ -238,7 +238,7 @@ section.zero {
   position: relative;
   width: 100%;
   overflow: hidden;
-  background-color: var(--clr-surface-alt);
+  background-color: var(--clr-ink-faint);
   border-radius: var(--radius-lg);
 }
 .image-block img {
