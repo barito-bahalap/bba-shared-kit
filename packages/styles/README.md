@@ -2,12 +2,6 @@
 
 ## Supersedes the earlier `packages-config` output
 
-An earlier turn produced `tokens.css` + `globals-corporate/tech/media/dashboard.css`
-under `packages-config/`. This package replaces that entirely with a fuller
-system (reset, typography, layout, cards, motion, divider) plus the same
-brand-override pattern, now under `brands/`. Use this one; don't keep both,
-or you'll have two competing sources of truth for `--clr-primary`.
-
 Keep `packages/config` (if you still want it) for build tooling only,
 eslint config, tsconfig base, Tailwind preset if you use one. This package
 is pure CSS custom properties and has no Tailwind dependency, so it works
@@ -20,18 +14,6 @@ Two-layer tokens, same discipline as your e-palugada reference:
 - `--palette-*`, raw values. Never reference these in component CSS.
 - `--clr-*`, semantic aliases. Components only ever use these.
 
-`tokens.css` sets BBA's base weighting (teal primary, orange accent).
-Each app then imports exactly one file from `brands/` which overrides
-`--clr-primary` / `--clr-accent` / `--clr-surface` / `--clr-primary-ink`
-to reweight the same four brand colors differently:
-
-| Brand file             | App                 | Primary | Accent                                      |
-| ---------------------- | ------------------- | ------- | ------------------------------------------- |
-| `brands/corporate.css` | bba-corporate (BBA) | Teal    | Orange (CTA only)                           |
-| `brands/tech.css`      | bba-tech (BBT)      | Teal    | Neutral gray (orange reserved for warnings) |
-| `brands/media.css`     | bba-media (BBM)     | Orange  | Teal                                        |
-| `brands/dashboard.css` | bba-dashboard       | Teal    | Neutral gray                                |
-
 Components in `@barito-bahalap/ui` should reference only `--clr-*` tokens, never
 `--palette-*` directly, that's what makes one component library look
 right across four differently-weighted brands.
@@ -41,7 +23,6 @@ right across four differently-weighted brands.
 ```css
 /* app/globals.css in each app */
 @import "@barito-bahalap/styles";
-@import "@barito-bahalap/styles/brands/corporate"; /* swap per app */
 ```
 
 Order matters: the brand import must come after the base import, since

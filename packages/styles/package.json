@@ -1,6 +1,6 @@
 {
   "name": "@barito-bahalap/styles",
-  "version": "1.3.5",
+  "version": "1.4.0",
   "main": "./index.css",
   "types": "./index.d.ts",
   "publishConfig": {
@@ -10,26 +10,6 @@
     ".": {
       "types": "./index.d.ts",
       "default": "./index.css"
-    },
-    "./brands/corporate": {
-      "types": "./index.d.ts",
-      "default": "./brands/corporate.css"
-    },
-    "./brands/tech": {
-      "types": "./index.d.ts",
-      "default": "./brands/tech.css"
-    },
-    "./brands/media": {
-      "types": "./index.d.ts",
-      "default": "./brands/media.css"
-    },
-    "./brands/dashboard": {
-      "types": "./index.d.ts",
-      "default": "./brands/dashboard.css"
-    },
-    "./brands/scopes": {
-      "types": "./index.d.ts",
-      "default": "./brands/scopes.css"
     }
   },
   "repository": {

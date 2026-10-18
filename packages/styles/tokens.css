@@ -3,13 +3,7 @@ Single source of truth for all design decisions.
 ARCHITECTURE: Two-layer token system
   Layer 1  --palette-*   Raw named colors. Never used in components directly.
   Layer 2  --clr-*       Semantic aliases. Components ONLY reference Layer 2.
-
-These are BBA's holding-layer defaults. Each app additionally loads a
-brands/*.css override (see brands/corporate.css, brands/tech.css,
-brands/media.css, brands/dashboard.css) which redefines the Layer 2
---clr-primary / --clr-accent pairing per brand weighting. Components
-in @barito-bahalap/ui must only reference Layer 2 tokens so swapping
-an app's brand file is enough to reskin every shared component.
+ 
 */
 
 /* Layer 1: Raw Palette */
@@ -90,15 +84,14 @@ an app's brand file is enough to reskin every shared component.
   --clr-ink-on-dark-soft: rgba(var(--palette-white-rgb), 0.75);
   --clr-ink-on-dark-muted: rgba(var(--palette-white-rgb), 0.45);
 
-  /* Brand: BBA base weighting (teal primary, orange accent).
-     Overridden per app in brands/*.css */
+  /* Brand: BBA base weighting (teal primary, orange accent).*/
   --clr-primary: var(--palette-teal);
   --clr-primary-rgb: var(--palette-teal-rgb);
   --clr-primary-light: var(--palette-teal-light);
   --clr-primary-hover: var(--palette-teal-hover);
   --clr-primary-soft: rgba(var(--palette-teal-rgb), 0.12);
   /* White text on teal passes AA; brand files that promote orange to
-     primary (BBM) must override this to dark ink, see brands/media.css */
+     primary (BBM) must override this to dark ink */
   --clr-primary-ink: var(--palette-white);
 
   --clr-accent: var(--palette-orange);

@@ -8,10 +8,3 @@
 @import "./cards.css";
 @import "./motion.css";
 @import "./divider.css";
-
-/* Import ONE brand override after this file, per app:
-   @import "@barito-bahalap/styles/brands/corporate";
-   @import "@barito-bahalap/styles/brands/tech";
-   @import "@barito-bahalap/styles/brands/media";
-   @import "@barito-bahalap/styles/brands/dashboard";
-*/
