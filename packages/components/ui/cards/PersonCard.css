@@ -24,6 +24,9 @@
   color: var(--clr-surface) !important;
   line-height: 1;
 }
+.person-card__photo span {
+  color: var(--clr-surface) !important;
+}
 
 .person-card__body {
   display: flex;
