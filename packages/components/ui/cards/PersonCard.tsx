@@ -1,7 +1,5 @@
 // Style
 import "./PersonCard.css";
-// Components
-import { Avatar } from "@barito-bahalap/components";
 
 interface PersonCardProps {
   name: string;
@@ -41,12 +39,6 @@ export function PersonCard({
       </div>
       <div className="person-card__body">
         <div className="person-card__head">
-          <Avatar
-            name={name}
-            size="sm"
-            src={photoSrc}
-            className="person-card__avatar"
-          />
           <div>
             <h3 className="person-card__name">{name}</h3>
             <p className="person-card__title">{title}</p>
