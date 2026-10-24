@@ -50,7 +50,10 @@ export function getFooterGroups(locale: string): FooterGroup[] {
     },
     {
       title: text.legal[l],
-      links: [link("privacy", "/privacy", l), link("terms", "/terms", l)],
+      links: [
+        link("privacy", "https://baritobahalap.com/privacy", l),
+        link("terms", "https://baritobahalap.com/terms", l),
+      ],
     },
   ];
 }
